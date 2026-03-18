@@ -1,4 +1,3 @@
-[etama-gestionar.html](https://github.com/user-attachments/files/26056732/etama-gestionar.html)
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -211,23 +210,22 @@
     <div class="screen" id="screen-cancel-ok">
       <div class="result-icon">✅</div>
       <p class="result-title">Reserva cancelada</p>
-      <p class="result-sub">Hemos recibido tu solicitud de cancelación y hemos notificado al restaurante.<br><br>Si tienes alguna duda, escríbenos a <strong>gaetanomans92@gmail.com</strong></p>
+      <p class="result-sub">Hemos recibido tu solicitud de cancelación y hemos notificado al restaurante.<br><br>Si tienes alguna duda, escríbenos a <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c9aea8acbda8a7a6a4a8a7baf0fb89aea4a8a0a5e7aaa6a4">[email&#160;protected]</a></strong></p>
       <a href="https://gaetanomans92.github.io/Reserva/etama-reservas.html" class="btn-cancel" style="display:block;text-align:center;text-decoration:none;">Hacer nueva reserva</a>
     </div>
 
-    <!-- SCREEN 3: MODIFY SUCCESS -->
+    <!-- SCREEN 3: MODIFY - redirect to form -->
     <div class="screen" id="screen-modify-ok">
-      <div class="result-icon">📬</div>
-      <p class="result-title">Solicitud enviada</p>
-      <p class="result-sub">Hemos enviado tu solicitud de modificación al restaurante.<br><br>Te contactaremos en breve para confirmar el cambio a <strong id="modify-email-shown"></strong></p>
-      <a href="https://gaetanomans92.github.io/Reserva/etama-reservas.html" class="btn-cancel" style="display:block;text-align:center;text-decoration:none;">Hacer nueva reserva</a>
+      <div class="result-icon">✏️</div>
+      <p class="result-title">Redirigiendo...</p>
+      <p class="result-sub">Te llevamos al formulario para que elijas nueva fecha y hora.</p>
     </div>
 
   </div>
   <a href="https://etama.es" class="btn-home">← Volver a etama.es</a>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 emailjs.init({ publicKey: 'ZvrcbYXijlj1r-iGp' });
 
 const EMAIL_CONFIG = {
@@ -284,28 +282,32 @@ async function handleAction() {
 
   try {
     await emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateIdRestaurant, {
-      to_email:  EMAIL_CONFIG.restaurantEmail,
-      ref:       ref,
-      name:      email,
-      fname:     action,
-      lname:     ref,
-      email:     email,
-      phone:     '—',
-      date:      action,
-      time:      '—',
-      guests:    '—',
-      zone:      mode === 'cancel' ? 'El cliente solicita CANCELAR esta reserva.' : 'El cliente solicita MODIFICAR esta reserva. Contactarle en: ' + email,
-      comments:  `${action} solicitada por el cliente. Referencia: ${ref}. Email: ${email}`,
-      subject:   subject,
+      to_email:   EMAIL_CONFIG.restaurantEmail,
+      ref:        ref,
+      name:       email,
+      fname:      mode === 'cancel' ? '❌ CANCELACIÓN' : '✏️ MODIFICACIÓN',
+      lname:      ref,
+      email:      email,
+      phone:      '—',
+      date:       mode === 'cancel' ? '— Reserva cancelada —' : '— Solicitud de cambio —',
+      time:       '—',
+      guests:     '—',
+      zone:       mode === 'cancel' ? '🔴 El cliente ha cancelado esta reserva.' : '🔵 El cliente solicita modificar. Contactar en: ' + email,
+      alergenos:  '—',
+      occasion:   mode === 'cancel' ? 'CANCELACIÓN solicitada por ' + email : 'MODIFICACIÓN solicitada por ' + email,
+      comments:   `Referencia: ${ref} · Email cliente: ${email}`,
     });
 
-    // Show success screen
+    // Show result
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     if (mode === 'cancel') {
       document.getElementById('screen-cancel-ok').classList.add('active');
     } else {
-      document.getElementById('modify-email-shown').textContent = email;
       document.getElementById('screen-modify-ok').classList.add('active');
+      // Redirect to reservation form after 1.5s
+      setTimeout(function() {
+        window.location.href = 'https://gaetanomans92.github.io/Reserva/etama-reservas.html?modificar=' + encodeURIComponent(ref);
+      }, 1500);
     }
   } catch(e) {
     showAlert('Error al enviar. Por favor llámanos directamente.');
