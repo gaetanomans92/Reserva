@@ -1309,6 +1309,7 @@ async function doSubmit() {
   document.getElementById('success-email').textContent = state.email;
 
   await sendEmails(refNum);
+  await logToSheets(refNum);  // Log to Google Sheets for Make.com automation
 
   state.step = 4;
   state.submitting = false;
@@ -1319,6 +1320,41 @@ async function doSubmit() {
 // ─────────────────────────────────────────────────────────
 // EMAILS via EmailJS
 // ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────
+// LOG TO GOOGLE SHEETS — for Make.com automation
+// ─────────────────────────────────────────────────────────
+async function logToSheets(refNum) {
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyM4yfweAteGFbf26tTqakcYr9bezD38x-EenoFcMnHQ4n-RJ3dvMdrVgLMu6oZkfeGmQ/exec';
+  const d = new Date(state.date + 'T12:00:00');
+  const zoneNames = {interior:'Interior', terraza:'Terraza', barra:'Sin preferencia'};
+  try {
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ref:       refNum,
+        date:      state.date,
+        dateStr:   `${DAYS[d.getDay()]} ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`,
+        time:      state.time,
+        guests:    state.guests,
+        zone:      zoneNames[state.zone] || state.zone,
+        fname:     state.fname,
+        lname:     state.lname,
+        name:      state.fname + ' ' + state.lname,
+        email:     state.email,
+        phone:     state.phonePrefix + ' ' + state.phone,
+        alergenos: state.alergenos || '—',
+        occasion:  state.occasion  || '—',
+        comments:  state.comments  || '—',
+        timestamp: new Date().toISOString(),
+      })
+    });
+  } catch(e) {
+    console.warn('Sheet logging failed (non-critical):', e);
+  }
+}
+
 async function sendEmails(refNum) {
   if (EMAIL_CONFIG.serviceId === 'YOUR_SERVICE_ID') {
     console.warn('EmailJS no configurado — omitiendo envío de email');
