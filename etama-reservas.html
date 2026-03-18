@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1190,6 +1189,9 @@ function changeGuests(delta) {
   document.getElementById('guests-num').textContent = state.guests;
   document.getElementById('minus-btn').disabled = state.guests <= 1;
   document.getElementById('plus-btn').disabled  = state.guests >= 8;
+  // Update sidebar immediately
+  const sbGuests = document.getElementById('sb-guests');
+  if (sbGuests) sbGuests.textContent = state.guests + ' persona' + (state.guests !== 1 ? 's' : '');
   updateSummaryBar();
 }
 
