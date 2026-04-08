@@ -427,15 +427,15 @@
     <!-- ZONE -->
     <label class="field-label" style="margin-top:24px;">Zona</label>
     <div class="zone-grid">
-      <div class="zone-card" onclick="selectZone('interior')">
+      <div class="zone-card" onclick="selectZone('interior', this)">
         <div class="zone-icon">🪴</div>
         <div class="zone-name">Interior</div>
       </div>
-      <div class="zone-card" onclick="selectZone('terraza')">
+      <div class="zone-card" onclick="selectZone('terraza', this)">
         <div class="zone-icon">☀️</div>
         <div class="zone-name">Terraza</div>
       </div>
-      <div class="zone-card" onclick="selectZone('barra')">
+      <div class="zone-card" onclick="selectZone('barra', this)">
         <div class="zone-icon">🥗</div>
         <div class="zone-name">Sin preferencia</div>
       </div>
@@ -787,9 +787,9 @@ function selectTime(el) {
   updateSummaryBar();
 }
 
-function selectZone(zone) {
+function selectZone(zone, el) {
   document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
+  if (el) el.classList.add('selected');
   state.zone = zone;
   state.time = '';  // reset time when zone changes
   renderSlots();
