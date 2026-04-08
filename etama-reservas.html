@@ -147,7 +147,7 @@
   .section-sub { font-size: 13px; color: var(--text-light); margin-bottom: 28px; line-height: 1.5; }
 
   /* ─── INPUTS ─── */
-  .input-group { display: flex; flex-direction: column; gap: 6px; }
+  .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
   .input-group label,
   .field-label {
     font-size: 10px; font-weight: 600;
@@ -188,609 +188,196 @@
   .guests-controls { display: flex; align-items: center; gap: 18px; }
   .guests-num { font-size: 22px; font-weight: 600; color: var(--green-deep); min-width: 30px; text-align: center; font-family: 'IBM Plex Mono', monospace; }
   .guests-btn {
-    width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--green-light);
-    background: white; color: var(--green-mid); font-size: 22px; font-weight: 300;
-    cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); line-height: 1;
+    background: white; border: 1.5px solid var(--cream-dark);
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: var(--transition); font-size: 18px; color: var(--text-mid);
+    user-select: none;
   }
-  .guests-btn:hover { background: var(--green-light); color: white; border-color: var(--green-light); transform: scale(1.05); }
-  .guests-btn:disabled { border-color: var(--cream-dark); color: var(--text-light); cursor: not-allowed; transform: none; }
-  .guests-btn:disabled:hover { background: white; color: var(--text-light); }
+  .guests-btn:not(:disabled):hover { background: var(--green-pale); border-color: var(--green-light); color: var(--green-deep); }
+  .guests-btn:disabled { opacity: 0.3; cursor: not-allowed; }
 
-  /* ─── SLOTS ─── */
-  .slots-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-mid); margin-bottom: 12px; }
-  .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-bottom: 32px; }
+  /* ─── TIME SLOTS (GROUPED) ─── */
+  .slot-group { margin-bottom: 30px; }
+  .slot-group-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-mid); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .slot-btn {
-    border: 1.5px solid var(--cream-dark); border-radius: var(--radius-xs);
-    padding: 12px 4px; font-family: 'Museo Sans', sans-serif; font-size: 13px; font-weight: 500;
-    color: var(--text-mid); background: white; cursor: pointer; transition: var(--transition);
-    text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: white; border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-xs); padding: 12px 8px;
+    font-size: 15px; font-weight: 500; color: var(--text-dark);
+    cursor: pointer; transition: var(--transition);
+    text-align: center; min-height: 52px;
+    display: flex; align-items: center; justify-content: center;
   }
-  .slot-btn:hover { border-color: var(--green-light); color: var(--green-mid); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(82,183,136,0.15); }
-  .slot-btn.selected { background: var(--green-deep); border-color: var(--green-deep); color: white; font-weight: 600; box-shadow: 0 4px 12px rgba(26,58,42,0.25); transform: translateY(-1px); }
-  .slot-btn.full { background: var(--cream-dark); color: var(--text-light); cursor: not-allowed; text-decoration: line-through; box-shadow: none; }
-  .horario-banner { font-size: 12px; color: var(--green-mid); background: var(--green-pale); border-radius: var(--radius-xs); padding: 8px 12px; margin-bottom: 12px; font-weight: 500; }
+  .slot-btn:hover { border-color: var(--green-light); background: var(--green-pale); }
+  .slot-btn.selected { background: var(--green-deep); color: white; border-color: var(--green-deep); }
+  .slot-btn.full { background: var(--cream-dark); color: var(--text-light); opacity: 0.5; cursor: not-allowed; }
+  .slot-btn.full:hover { border-color: var(--cream-dark); background: var(--cream-dark); }
 
   /* ─── ZONES ─── */
-  .zone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; }
+  .zone-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 30px; }
   .zone-card {
-    border: 1.5px solid var(--cream-dark); border-radius: var(--radius);
-    padding: 22px 16px; cursor: pointer; transition: var(--transition);
-    background: white; text-align: center;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+    background: white; border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-sm); padding: 20px 16px;
+    text-align: center; cursor: pointer; transition: var(--transition);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
   }
-  .zone-card:hover { border-color: var(--green-light); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(82,183,136,0.15); }
-  .zone-card.selected { border-color: var(--green-mid); background: #f4fbf7; box-shadow: 0 0 0 3px rgba(45,106,79,0.1), 0 4px 16px rgba(45,106,79,0.1); transform: translateY(-2px); }
-  .zone-icon { font-size: 30px; margin-bottom: 10px; }
-  .zone-name { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
-  .zone-desc { font-size: 11px; color: var(--text-light); line-height: 1.4; }
-  .zone-badge { display: inline-block; background: var(--green-pale); color: var(--green-mid); border-radius: 20px; padding: 3px 10px; font-size: 10px; font-weight: 600; margin-top: 8px; letter-spacing: 0.3px; }
+  .zone-card:hover { border-color: var(--green-light); background: var(--green-pale); }
+  .zone-card.selected { background: var(--green-deep); color: white; border-color: var(--green-deep); }
+  .zone-icon { font-size: 32px; }
+  .zone-name { font-size: 13px; font-weight: 600; }
 
-  /* ─── OCCASION ─── */
-  .occasion-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-mid); margin-bottom: 12px; }
-  .occasion-grid { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 28px; }
+  /* ─── OCCASION CHIPS ─── */
+  .occasion-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
   .occasion-chip {
-    border: 1.5px solid var(--cream-dark); border-radius: 30px; padding: 8px 16px;
-    font-size: 13px; font-weight: 400; color: var(--text-mid); background: white;
-    cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 6px;
-    user-select: none; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    background: white; border: 1.5px solid var(--cream-dark);
+    border-radius: 50px; padding: 10px 18px;
+    font-size: 13px; color: var(--text-mid); cursor: pointer;
+    transition: var(--transition); font-weight: 500;
   }
-  .occasion-chip:hover { border-color: var(--green-light); transform: translateY(-1px); }
-  .occasion-chip.selected { background: var(--green-deep); border-color: var(--green-deep); color: white; box-shadow: 0 3px 10px rgba(26,58,42,0.2); }
-
-  /* ─── FORM ─── */
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-  .phone-row { display: flex; gap: 10px; margin-bottom: 14px; }
-  .phone-prefix {
-    background: white; border: 1.5px solid var(--cream-dark); border-radius: var(--radius-sm);
-    padding: 14px 12px; font-size: 14px; font-family: 'Museo Sans', sans-serif;
-    color: var(--text-dark); outline: none; width: 90px; -webkit-appearance: none; cursor: pointer;
-    flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-  }
-  .phone-prefix:focus { border-color: var(--green-light); }
+  .occasion-chip:hover { border-color: var(--green-light); background: var(--green-pale); }
+  .occasion-chip.selected { background: var(--green-light); color: var(--green-deep); border-color: var(--green-light); }
 
   /* ─── ALERGENOS ─── */
-  .alergenos { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .alergenos-box {
+    background: var(--cream-card); border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius-sm); padding: 20px; margin-bottom: 24px;
+  }
+  .alergenos-title { font-size: 13px; font-weight: 600; color: var(--green-deep); margin-bottom: 4px; }
+  .alergenos-desc { font-size: 12px; color: var(--text-light); margin-bottom: 14px; line-height: 1.6; }
+  .alergenos-grid { display: flex; flex-wrap: wrap; gap: 8px; }
   .alergeno-chip {
-    border: 1.5px solid var(--cream-dark); border-radius: 20px; padding: 6px 13px;
-    font-size: 12px; color: var(--text-mid); background: white; cursor: pointer; transition: var(--transition);
-    display: flex; align-items: center; gap: 4px; user-select: none;
+    background: white; border: 1.5px solid var(--cream-dark);
+    border-radius: 50px; padding: 8px 16px;
+    font-size: 12px; color: var(--text-mid); cursor: pointer;
+    transition: var(--transition); font-weight: 500;
   }
-  .alergeno-chip.selected { border-color: var(--sand); background: var(--sand-light); color: #7a5800; }
+  .alergeno-chip:hover { border-color: var(--green-light); background: var(--green-pale); }
+  .alergeno-chip.selected { background: var(--green-light); color: var(--green-deep); border-color: var(--green-light); }
 
-  /* ─── POLICY ─── */
-  .policy-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
-  .policy-check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--green-mid); cursor: pointer; margin-top: 2px; flex-shrink: 0; }
-  .policy-check label { font-size: 12px; color: var(--text-light); line-height: 1.6; cursor: pointer; }
-  .policy-check a { color: var(--green-mid); text-decoration: none; border-bottom: 1px solid rgba(45,106,79,0.3); }
-
-  /* ─── CONFIRM ─── */
-  .confirm-card { background: white; border-radius: var(--radius); padding: 28px; margin-bottom: 24px; box-shadow: var(--shadow); border: 1px solid var(--cream-dark); }
-  .confirm-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--cream-dark); }
-  .confirm-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .confirm-row:first-child { padding-top: 0; }
-  .confirm-key { font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
-  .confirm-val { font-size: 15px; font-weight: 500; color: var(--text-dark); text-align: right; max-width: 60%; word-break: break-word; }
-
-  /* ─── SUCCESS ─── */
-  .success-anim { text-align: center; padding: 48px 20px; }
-  .success-circle {
-    width: 88px; height: 88px;
-    background: linear-gradient(135deg, var(--green-light), var(--green-mid));
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 24px; font-size: 38px;
-    box-shadow: 0 12px 40px rgba(82,183,136,0.35);
-    animation: popIn 0.55s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  /* ─── POLICIES ─── */
+  .policy-box {
+    background: #fff8f0; border: 1.5px solid #f0dcc8;
+    border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;
   }
-  @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-  .success-title { font-family: 'IBM Plex Mono', monospace; font-size: 30px; font-weight: 400; color: var(--green-deep); margin-bottom: 10px; letter-spacing: -0.01em; }
-  .success-sub { font-size: 14px; color: var(--text-light); margin-bottom: 32px; line-height: 1.7; }
-  .ref-badge { background: var(--cream-dark); border-radius: var(--radius-xs); padding: 12px 24px; display: inline-block; font-size: 12px; color: var(--text-mid); margin-bottom: 32px; }
-  .ref-badge strong { color: var(--green-deep); font-size: 18px; display: block; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.05em; }
-
-  /* ─── INFO BANNER ─── */
-  .info-banner {
-    background: linear-gradient(135deg, #edf7f2, #f3faf6);
-    border: 1px solid var(--green-pale); border-radius: var(--radius-sm);
-    padding: 14px 16px; font-size: 13px; color: var(--green-deep); margin-bottom: 24px;
-    display: flex; gap: 10px; align-items: flex-start; line-height: 1.6;
+  .policy-title { font-size: 12px; font-weight: 600; color: var(--text-mid); margin-bottom: 8px; }
+  .policy-text { font-size: 12px; color: var(--text-mid); line-height: 1.7; margin-bottom: 12px; }
+  .policy-check {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px; background: white; border-radius: var(--radius-xs); margin-bottom: 10px;
   }
-
-  /* ─── BACK BTN ─── */
-  .back-btn {
-    background: none; border: none; color: var(--text-light); font-family: 'Museo Sans', sans-serif;
-    font-size: 13px; font-weight: 500; cursor: pointer; padding: 4px 0;
-    display: flex; align-items: center; gap: 6px; margin-bottom: 24px; transition: var(--transition);
-    letter-spacing: 0.2px;
+  .policy-check:last-child { margin-bottom: 0; }
+  .policy-check input[type="checkbox"] {
+    margin-top: 2px; cursor: pointer; width: 18px; height: 18px;
+    accent-color: var(--green-deep);
   }
-  .back-btn:hover { color: var(--green-deep); }
+  .policy-check label { font-size: 12px; color: var(--text-mid); line-height: 1.6; cursor: pointer; flex: 1; }
 
-  /* ─── SUMMARY BAR ─── */
-  .summary-bar {
-    position: relative; bottom: auto; left: auto; right: auto;
-    background: white; border-top: 1px solid var(--cream-dark);
-    padding: 16px 20px; z-index: 200; box-shadow: 0 -4px 24px rgba(0,0,0,0.07);
+  /* ─── SUMMARY (STEP 3) ─── */
+  .summary-card {
+    background: white; border: 1.5px solid var(--cream-dark);
+    border-radius: var(--radius); padding: 24px; margin-bottom: 24px;
+    box-shadow: var(--shadow);
   }
-  .summary-inner { max-width: 540px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-  .summary-info { flex: 1; min-width: 0; }
-  .summary-date { font-size: 13px; font-weight: 600; color: var(--green-deep); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .summary-guests { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .summary-title { font-size: 14px; font-weight: 600; color: var(--green-deep); margin-bottom: 16px; letter-spacing: 0.5px; }
+  .summary-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--cream-dark); }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-label { font-size: 12px; color: var(--text-light); }
+  .summary-value { font-size: 13px; font-weight: 600; color: var(--text-dark); }
 
-  /* ─── CTA BTN ─── */
-  .cta-btn {
-    background: linear-gradient(135deg, var(--green-mid), var(--green-deep));
-    color: white; border: none; border-radius: 50px; padding: 15px 30px;
+  /* ─── SUCCESS (STEP 4) ─── */
+  .success-box {
+    background: white; border-radius: var(--radius);
+    padding: 48px 24px; text-align: center; box-shadow: var(--shadow-lg);
+  }
+  .success-icon { font-size: 72px; margin-bottom: 20px; }
+  .success-title { font-family: 'IBM Plex Mono', monospace; font-size: 26px; font-weight: 400; color: var(--green-deep); margin-bottom: 12px; }
+  .success-ref { font-size: 15px; color: var(--text-mid); margin-bottom: 32px; }
+  .success-btn {
+    background: var(--green-deep); color: white; border: none;
+    border-radius: 50px; padding: 16px 32px;
     font-family: 'Museo Sans', sans-serif; font-size: 15px; font-weight: 600;
     cursor: pointer; transition: var(--transition);
-    white-space: nowrap; box-shadow: 0 4px 18px rgba(26,58,42,0.3);
-    letter-spacing: 0.2px;
   }
-  .cta-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,58,42,0.4); }
-  .cta-btn:active:not(:disabled) { transform: translateY(0); }
-  .cta-btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; transform: none; }
+  .success-btn:hover { background: var(--green-mid); }
 
-  /* ─── NEW RESERVATION BTN ─── */
-  .new-res-btn {
-    background: white; border: 1.5px solid var(--green-mid); color: var(--green-mid);
-    border-radius: 50px; padding: 13px 28px; font-family: 'Museo Sans', sans-serif;
-    font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition);
-    box-shadow: 0 2px 10px rgba(45,106,79,0.1);
+  /* ─── BOTTOM BAR ─── */
+  .summary-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: white; border-top: 1px solid var(--cream-dark);
+    padding: 16px 20px; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
   }
-  .new-res-btn:hover { background: var(--green-mid); color: white; transform: translateY(-1px); }
+  .summary-bar-inner { max-width: 540px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .summary-bar-info { flex: 1; min-width: 0; }
+  .summary-bar-date { font-size: 13px; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .summary-bar-guests { font-size: 11px; color: var(--text-light); }
+  .cta-btn {
+    background: var(--green-deep); color: white; border: none;
+    border-radius: 50px; padding: 14px 28px;
+    font-family: 'Museo Sans', sans-serif; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: var(--transition); white-space: nowrap;
+  }
+  .cta-btn:hover:not(:disabled) { background: var(--green-mid); transform: translateY(-1px); }
+  .cta-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* ─── STEPS HIDE/SHOW ─── */
+  /* ─── TAGS (show/hide steps) ─── */
   .tag { display: none; }
-  .tag.active { display: block; animation: fadeSlide 0.28s cubic-bezier(0.4,0,0.2,1) both; }
-  @keyframes fadeSlide { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-
-  /* ─── ALERT ─── */
-  .alert-toast {
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-    background: var(--green-deep); color: white; border-radius: 30px;
-    padding: 12px 24px; font-size: 14px; font-weight: 500;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2); z-index: 9999;
-    animation: toastIn 0.3s cubic-bezier(0.175,0.885,0.32,1.275) both;
-    white-space: nowrap; max-width: 90vw; text-align: center;
-  }
-  @keyframes toastIn { from { opacity: 0; transform: translateX(-50%) translateY(-10px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-
-  /* ─── DIVIDER ─── */
-  .section-divider { height: 1px; background: var(--cream-dark); margin: 28px 0; }
+  .tag.active { display: block; }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 480px) {
-    .hero { padding: 40px 20px 56px; }
-    .hero-logo { height: 46px; }
     .section-title { font-size: 24px; }
-    .slots-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .slots-grid { grid-template-columns: repeat(2, 1fr); }
     .zone-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .main { padding: 28px 16px 100px; }
-    .confirm-card { padding: 20px; }
-    .cta-btn { padding: 14px 22px; font-size: 14px; }
-  }
-  @media (min-width: 768px) {
-    .hero { padding: 64px 40px 88px; }
-    .hero-logo { height: 64px; }
-    .hero-subtitle { font-size: 12px; }
-    .section-title { font-size: 32px; }
-    .main { padding: 44px 24px 130px; }
-    .slots-grid { gap: 10px; }
-    .slot-btn { font-size: 14px; padding: 13px 4px; }
-    .zone-card { padding: 26px 20px; }
   }
 
-  /* ─── DESIGN UPGRADES ─── */
-  
-  /* Better hero */
-  .hero {
-    background: linear-gradient(155deg, #0a3332 0%, #145957 40%, #1a6e6b 75%, #145957 100%) !important;
-    padding: 56px 24px 80px !important;
-  }
-  .hero-subtitle { 
-    font-size: 10px !important; 
-    letter-spacing: 4px !important; 
-    opacity: 0.5 !important;
-    margin-top: 18px !important;
-    margin-bottom: 12px !important;
-  }
-  .hero-logo { height: 60px !important; margin-bottom: 16px !important; }
-  
-  /* Refined steps bar */
-  .steps-container {
-    background: white !important;
-    border-bottom: 1px solid #f0ebe0 !important;
-    box-shadow: 0 1px 12px rgba(26,58,42,0.06) !important;
-  }
-  .step-num { 
-    width: 28px !important; height: 28px !important;
-    font-size: 11px !important;
-  }
-  .step-label { font-size: 8px !important; letter-spacing: 1.5px !important; }
-  
-  /* Better section titles */
-  .section-title {
-    font-size: 30px !important;
-    font-weight: 300 !important;
-    letter-spacing: -0.02em !important;
-    line-height: 1.15 !important;
-    margin-bottom: 4px !important;
-  }
-  .section-sub { 
-    font-size: 13px !important; 
-    margin-bottom: 32px !important;
-    line-height: 1.6 !important;
-  }
+  /* ─── PHONE PREFIX ─── */
+  .phone-group { display: flex; gap: 10px; }
+  .phone-prefix { flex: 0 0 90px; }
+  .phone-number { flex: 1; }
 
-  /* Better date input */
-  .input-field, .input-group input, .input-group select {
-    padding: 15px 18px !important;
-    font-size: 16px !important;
-    border-radius: 14px !important;
-    border: 1.5px solid #e8e0d0 !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  /* ─── BACK BUTTON ─── */
+  .back-btn {
+    background: none; border: none; color: var(--text-mid);
+    font-size: 13px; cursor: pointer; padding: 8px 0; margin-bottom: 20px;
+    display: flex; align-items: center; gap: 6px; font-weight: 500;
+    transition: var(--transition);
   }
-  .input-field:focus, .input-group input:focus {
-    border-color: #52b788 !important;
-    box-shadow: 0 0 0 3px rgba(82,183,136,0.1) !important;
-  }
+  .back-btn:hover { color: var(--green-deep); }
 
-  /* Better day name */
-  .day-name {
-    font-size: 13px !important;
-    color: var(--green-mid) !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.3px !important;
-    margin-top: 6px !important;
+  /* ─── LOADING OVERLAY ─── */
+  .loading-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 10000;
+    background: rgba(255,255,255,0.95);
+    align-items: center; justify-content: center;
   }
-
-  /* Better guests row */
-  .guests-row {
-    background: white !important;
-    border: 1.5px solid #e8e0d0 !important;
-    border-radius: 14px !important;
-    padding: 14px 18px !important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  .loading-overlay.active { display: flex; }
+  .loading-spinner {
+    width: 48px; height: 48px;
+    border: 4px solid var(--cream-dark);
+    border-top-color: var(--green-deep);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
   }
-  .minus-btn, .plus-btn {
-    width: 34px !important; height: 34px !important;
-    border-radius: 50% !important;
-    font-size: 18px !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1) !important;
-  }
-  .guests-count { 
-    font-size: 20px !important; 
-    font-weight: 600 !important;
-    min-width: 32px !important;
-    text-align: center !important;
-  }
-
-  /* Better slots */
-  .slot-btn {
-    padding: 12px 8px !important;
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    border-radius: 12px !important;
-    border: 1.5px solid #e8e0d0 !important;
-    letter-spacing: 0.3px !important;
-    transition: all 0.18s ease !important;
-  }
-  .slot-btn:hover { 
-    border-color: var(--green-light) !important; 
-    background: rgba(82,183,136,0.06) !important;
-    transform: translateY(-1px) !important;
-  }
-  .slot-btn.selected {
-    background: var(--green-deep) !important;
-    border-color: var(--green-deep) !important;
-    color: white !important;
-    box-shadow: 0 3px 12px rgba(20,89,87,0.25) !important;
-    transform: translateY(-1px) !important;
-  }
-
-  /* Better zone cards */
-  .zone-card {
-    border-radius: 16px !important;
-    padding: 22px 16px !important;
-    border: 1.5px solid #e8e0d0 !important;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
-    transition: all 0.2s ease !important;
-  }
-  .zone-card:hover {
-    border-color: var(--green-light) !important;
-    box-shadow: 0 4px 16px rgba(26,58,42,0.1) !important;
-    transform: translateY(-2px) !important;
-  }
-  .zone-card.selected {
-    border-color: var(--green-deep) !important;
-    background: rgba(26,58,42,0.04) !important;
-    box-shadow: 0 4px 16px rgba(26,58,42,0.15) !important;
-  }
-  .zone-icon { font-size: 28px !important; margin-bottom: 10px !important; }
-  .zone-name { font-size: 15px !important; font-weight: 600 !important; margin-bottom: 4px !important; }
-  .zone-desc { font-size: 12px !important; line-height: 1.5 !important; }
-  .zone-badge { 
-    font-size: 9px !important; 
-    padding: 3px 10px !important;
-    border-radius: 20px !important;
-    letter-spacing: 0.8px !important;
-    margin-top: 10px !important;
-  }
-
-  /* Better occasion chips */
-  .occasion-chip {
-    padding: 8px 14px !important;
-    border-radius: 50px !important;
-    font-size: 12px !important;
-    font-weight: 500 !important;
-    border: 1.5px solid #e8e0d0 !important;
-    transition: all 0.18s ease !important;
-  }
-  .occasion-chip:hover { 
-    border-color: var(--green-light) !important;
-    background: rgba(82,183,136,0.06) !important;
-  }
-  .occasion-chip.selected {
-    background: var(--green-deep) !important;
-    border-color: var(--green-deep) !important;
-    color: white !important;
-  }
-
-  /* Better CTA button */
-  .cta-wrap { padding: 16px 20px !important; }
-  #cta-btn {
-    border-radius: 50px !important;
-    padding: 17px 32px !important;
-    font-size: 15px !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.5px !important;
-    box-shadow: 0 4px 20px rgba(20,89,87,0.3) !important;
-    transition: all 0.2s ease !important;
-  }
-  #cta-btn:hover {
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 28px rgba(20,89,87,0.4) !important;
-  }
-  #cta-btn:active { transform: translateY(0) !important; }
-
-  /* Better form inputs */
-  .input-row { gap: 12px !important; }
-  .textarea-field {
-    border-radius: 14px !important;
-    padding: 14px 16px !important;
-    font-size: 15px !important;
-    border: 1.5px solid #e8e0d0 !important;
-    line-height: 1.6 !important;
-  }
-  .textarea-field:focus {
-    border-color: #52b788 !important;
-    box-shadow: 0 0 0 3px rgba(82,183,136,0.1) !important;
-  }
-
-  /* Better confirm summary */
-  .confirm-box {
-    border-radius: 16px !important;
-    padding: 24px !important;
-    border: 1.5px solid #e8e0d0 !important;
-  }
-
-  /* Better success screen */
-  .success-icon {
-    font-size: 52px !important;
-    margin-bottom: 20px !important;
-  }
-  .success-title {
-    font-size: 32px !important;
-    font-weight: 300 !important;
-    letter-spacing: -0.02em !important;
-  }
-
-  /* Better info banner */
-  .info-banner {
-    border-radius: 14px !important;
-    padding: 14px 18px !important;
-    font-size: 13px !important;
-    line-height: 1.6 !important;
-    border: 1px solid rgba(169,203,187,0.4) !important;
-  }
-
-  /* Mobile optimizations */
-  @media (max-width: 480px) {
-    .hero { padding: 44px 20px 64px !important; }
-    .hero-logo { height: 48px !important; }
-    .main { padding: 28px 16px 100px !important; }
-    .section-title { font-size: 26px !important; }
-    .slot-btn { padding: 11px 6px !important; font-size: 13px !important; }
-    .zone-card { padding: 18px 14px !important; }
-    #cta-btn { padding: 16px 24px !important; font-size: 14px !important; }
-    .step-label { display: none !important; }
-    .step-num { width: 26px !important; height: 26px !important; }
-  }
-
-  /* Desktop max-width breathing room */
-  @media (min-width: 600px) {
-    .main { padding: 44px 32px 120px !important; }
-    .hero { padding: 64px 32px 88px !important; }
-  }
-
-
-  /* ─── SLOT GROUPS ─── */
-  .slot-group-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-light);
-    margin: 16px 0 8px;
-    grid-column: 1 / -1;
-  }
-  .slot-group-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 4px;
-  }
-  .slot-group-grid .slot-btn {
-    padding: 14px 8px !important;
-    font-size: 16px !important;
-    font-weight: 600 !important;
-    border-radius: 14px !important;
-    min-height: 52px;
-    letter-spacing: 0.5px;
-  }
-  #slots-grid {
-    display: block !important;
-  }
-
-  /* ─── ALERGENOS PROMINENT ─── */
-  .alergenos-section {
-    background: #faf7f2;
-    border: 1.5px solid var(--cream-dark);
-    border-radius: 16px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .alergenos-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--green-deep);
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .alergenos-sub {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-bottom: 14px;
-    line-height: 1.5;
-  }
-  .alergenos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .alergeno-chip {
-    padding: 10px 16px !important;
-    border-radius: 50px !important;
-    font-size: 13px !important;
-    font-weight: 500 !important;
-    border: 1.5px solid var(--cream-dark) !important;
-    background: white !important;
-    cursor: pointer;
-    transition: all 0.18s ease !important;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .alergeno-chip:hover {
-    border-color: var(--green-mid) !important;
-    background: rgba(169,203,187,0.15) !important;
-  }
-  .alergeno-chip.selected {
-    background: var(--green-deep) !important;
-    border-color: var(--green-deep) !important;
-    color: white !important;
-    box-shadow: 0 2px 8px rgba(26,58,42,0.2) !important;
-  }
-
-  /* ─── DESKTOP SIDEBAR LAYOUT ─── */
-  @media (min-width: 900px) {
-    .page-layout {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      max-width: 960px;
-      margin: 0 auto;
-      gap: 32px;
-      align-items: start;
-      padding: 0 32px;
-    }
-    .main {
-      max-width: 100% !important;
-      padding: 36px 0 100px !important;
-      margin: 0 !important;
-    }
-    .summary-sidebar {
-      display: block !important;
-      position: sticky;
-      top: 24px;
-      background: white;
-      border-radius: 20px;
-      border: 1.5px solid var(--cream-dark);
-      padding: 24px;
-      box-shadow: 0 4px 24px rgba(26,58,42,0.08);
-      margin-top: 36px;
-    }
-    .summary-bar {
-      display: none !important;
-    }
-  }
-  @media (max-width: 899px) {
-    .page-layout { display: block; }
-    .summary-sidebar { display: none !important; }
-    .summary-bar { display: block !important; }
-  }
-
-  /* Sidebar content */
-  .sidebar-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-light);
-    margin-bottom: 16px;
-  }
-  .sidebar-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--cream-dark);
-    font-size: 14px;
-  }
-  .sidebar-row:last-child { border-bottom: none; }
-  .sidebar-key { color: var(--text-light); font-size: 12px; }
-  .sidebar-val { font-weight: 600; color: var(--green-deep); }
-  .sidebar-cta {
-    width: 100%;
-    margin-top: 20px;
-    background: var(--green-deep);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 15px;
-    font-family: 'Museo Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-  }
-  .sidebar-cta:hover { background: #0f2318; transform: translateY(-1px); }
-  .sidebar-etama {
-    text-align: center;
-    margin-top: 16px;
-    font-size: 11px;
-    color: var(--text-light);
-    letter-spacing: 0.5px;
-  }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
 </style>
 </head>
 <body>
 
-<!-- Hero -->
-<div class="hero" id="top">
+<!-- HERO -->
+<div class="hero">
   <div class="hero-inner">
-    <img src="data:image/png;base64,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" alt="Etama" style="height:65px;display:block;margin:0 auto;filter:brightness(0) invert(1);" style="height:65px;display:block;margin:0 auto;filter:brightness(0) invert(1);">
-    <div class="hero-subtitle">El Clot · Barcelona</div>
+    <img class="hero-logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='IBM Plex Mono,monospace' font-size='64' font-weight='300' fill='white' letter-spacing='8'%3Eetama%3C/text%3E%3C/svg%3E" alt="Etama">
+    <p class="hero-subtitle">El Clot · Barcelona</p>
     <div class="stars">★★★★★</div>
-    <div class="reviews">5.0 · 83 reseñas en Google</div>
+    <p class="reviews">5.0 · 83 reseñas en Google</p>
   </div>
 </div>
 
-<!-- Steps -->
+<!-- STEPS BAR -->
 <div class="steps-container">
-
   <div class="steps">
     <div class="step active" id="step-ind-1">
       <div class="step-num">1</div>
@@ -807,23 +394,26 @@
   </div>
 </div>
 
-<!-- Main -->
-<div class="page-layout">
-<div class="main" id="main-content">
+<!-- MAIN CONTENT -->
+<div class="main">
 
-  <!-- STEP 1: FECHA -->
-  <div class="tag active" id="step1">
-    <p class="section-title">¿Cuándo queréis venir?</p>
-    <p class="section-sub">Selecciona fecha, hora y número de comensales</p>
+  <!-- STEP 1: FECHA, HORA, COMENSALES, ZONA, OCASIÓN -->
+  <div id="step1" class="tag active">
+    <h1 class="section-title">¿Cuándo queréis venir?</h1>
+    <p class="section-sub">Selecciona la fecha, hora y número de comensales.</p>
 
-    <div style="margin-bottom:20px;">
-      <label class="field-label">Fecha <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#c0b8a8;font-size:10px;">(cerramos los domingos)</span></label>
-      <input type="date" id="date-input" class="input-field" style="cursor:pointer;" />
-      <div class="date-hint" id="day-name"></div>
+    <!-- DATE -->
+    <div class="input-group">
+      <label for="date-input">Fecha</label>
+      <input type="date" id="date-input" class="input-field" onchange="onDateChange()">
+      <p class="date-hint">(cerramos los domingos)</p>
     </div>
 
+    <p id="day-name" style="font-size:14px;color:var(--text-mid);margin-bottom:16px;font-weight:500;"></p>
+
+    <!-- GUESTS -->
     <div class="guests-row">
-      <div class="guests-label">👥 Comensales</div>
+      <span class="guests-label">Comensales</span>
       <div class="guests-controls">
         <button class="guests-btn" id="minus-btn" onclick="changeGuests(-1)" disabled>−</button>
         <span class="guests-num" id="guests-num">2</span>
@@ -831,561 +421,521 @@
       </div>
     </div>
 
-    <div class="slots-title">Hora disponible</div>
-    <div class="info-banner" id="horario-banner" style="display:none;"></div>
-    <div class="slots-grid" id="slots-grid"></div>
+    <!-- TIME SLOTS (GROUPED) -->
+    <div id="slots-container"></div>
 
-
-    <p class="section-title" style="margin-top:28px;">¿Dónde preferís sentaros?</p>
-    <p class="section-sub">Cada espacio tiene su propia atmósfera</p>
+    <!-- ZONE -->
+    <label class="field-label" style="margin-top:24px;">Zona</label>
     <div class="zone-grid">
-      <div class="zone-card" id="zone-interior" onclick="selectZone('interior', this)">
+      <div class="zone-card" onclick="selectZone('interior')">
         <div class="zone-icon">🪴</div>
         <div class="zone-name">Interior</div>
-        <div class="zone-desc">Ambiente íntimo y tranquilo</div>
-        <span class="zone-badge">Disponible</span>
       </div>
-      <div class="zone-card" id="zone-terraza" onclick="selectZone('terraza', this)">
+      <div class="zone-card" onclick="selectZone('terraza')">
         <div class="zone-icon">☀️</div>
         <div class="zone-name">Terraza</div>
-        <div class="zone-desc">Al aire libre, luminosa</div>
-        <span class="zone-badge">Disponible</span>
       </div>
-      <div class="zone-card" id="zone-barra" onclick="selectZone('barra', this)" style="grid-column: 1 / -1;">
+      <div class="zone-card" onclick="selectZone('barra')">
         <div class="zone-icon">🥗</div>
         <div class="zone-name">Sin preferencia</div>
-        <div class="zone-desc">Lo que mejor convenga</div>
-        <span class="zone-badge">Siempre disponible</span>
       </div>
     </div>
 
-    <div class="occasion-title">Ocasión especial (opcional)</div>
-    <div class="occasion-grid" id="occasion-grid">
-      <div class="occasion-chip" onclick="toggleChip(this)">🎂 Cumpleaños</div>
-      <div class="occasion-chip" onclick="toggleChip(this)">💍 Aniversario</div>
-      <div class="occasion-chip" onclick="toggleChip(this)">🎉 Celebración</div>
-      <div class="occasion-chip" onclick="toggleChip(this)">💼 Comida de trabajo</div>
-      <div class="occasion-chip" onclick="toggleChip(this)">👨‍👩‍👧 Familiar</div>
-      <div class="occasion-chip" onclick="toggleChip(this)">🌱 Evento vegano</div>
-    </div>
-
-    <div class="info-banner">
-      ℹ️ Recibirás confirmación por email. Disponemos de carta para celíacos, veganos y alérgenos.
+    <!-- OCASIÓN ESPECIAL -->
+    <label class="field-label">Ocasión especial (opcional)</label>
+    <div class="occasion-row">
+      <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Cumpleaños">🎂 Cumpleaños</div>
+      <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Aniversario">💐 Aniversario</div>
+      <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Cena de negocios">💼 Negocios</div>
+      <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Primera cita">❤️ Primera cita</div>
+      <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Celebración">🎉 Celebración</div>
     </div>
   </div>
 
+  <!-- STEP 2: DATOS PERSONALES -->
+  <div id="step2" class="tag">
+    <button class="back-btn" onclick="goBack()">← Atrás</button>
+    <h1 class="section-title">Tus datos</h1>
+    <p class="section-sub">Necesitamos tus datos para confirmar la reserva.</p>
 
-  <!-- STEP 2: DATOS -->
-  <div class="tag" id="step2">
-    <button class="back-btn" onclick="goBack()">← Volver</button>
-    <p class="section-title">Tus datos</p>
-    <p class="section-sub">Para enviarte la confirmación</p>
-
-    <div class="form-grid">
-      <div>
-        <label class="field-label">Nombre *</label>
-        <input class="input-field" type="text" id="fname" placeholder="Nombre" autocomplete="given-name" />
-      </div>
-      <div>
-        <label class="field-label">Apellidos *</label>
-        <input class="input-field" type="text" id="lname" placeholder="Apellidos" autocomplete="family-name" />
-      </div>
+    <div class="input-group">
+      <label for="fname">Nombre</label>
+      <input type="text" id="fname" class="input-field" placeholder="Tu nombre">
     </div>
 
-    <div style="margin-bottom:12px;">
-      <label class="field-label">Email *</label>
-      <input class="input-field" type="email" id="email" placeholder="correo@ejemplo.com" autocomplete="email" />
+    <div class="input-group">
+      <label for="lname">Apellido</label>
+      <input type="text" id="lname" class="input-field" placeholder="Tu apellido">
     </div>
 
-    <div style="margin-bottom:16px;">
-      <label class="field-label">Teléfono *</label>
-      <div class="phone-row">
-        <select class="phone-prefix" id="phone-prefix">
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="input-field" placeholder="tu@email.com">
+    </div>
+
+    <div class="input-group">
+      <label>Teléfono</label>
+      <div class="phone-group">
+        <select id="phone-prefix" class="input-field phone-prefix">
           <option value="+34">🇪🇸 +34</option>
           <option value="+33">🇫🇷 +33</option>
-          <option value="+44">🇬🇧 +44</option>
-          <option value="+1">🇺🇸 +1</option>
-          <option value="+49">🇩🇪 +49</option>
           <option value="+39">🇮🇹 +39</option>
-          <option value="+351">🇵🇹 +351</option>
-          <option value="+52">🇲🇽 +52</option>
-          <option value="+54">🇦🇷 +54</option>
+          <option value="+44">🇬🇧 +44</option>
+          <option value="+49">🇩🇪 +49</option>
+          <option value="+1">🇺🇸 +1</option>
         </select>
-        <input class="input-field" type="tel" id="phone" placeholder="600 000 000" autocomplete="tel" />
+        <input type="tel" id="phone" class="input-field phone-number" placeholder="631 17 98 08">
       </div>
     </div>
 
-    <div class="alergenos-section">
+    <!-- ALERGENOS -->
+    <div class="alergenos-box">
       <div class="alergenos-title">⚠️ Alergias o intolerancias</div>
-      <p class="alergenos-sub">Selecciona todo lo que aplique — lo tendremos en cuenta para tu mesa</p>
-      <div class="alergenos" id="alergenos-grid">
-        <div class="alergeno-chip" onclick="toggleChip(this)">🌾 Gluten</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🥛 Lácteos</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🥚 Huevo</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🥜 Frutos secos</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🐟 Pescado</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🦐 Marisco</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🌱 Vegano</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🥗 Vegetariano</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🫘 Soja</div>
-        <div class="alergeno-chip" onclick="toggleChip(this)">🌻 Sésamo</div>
+      <div class="alergenos-desc">Selecciona si tienes alguna alergia o intolerancia alimentaria.</div>
+      <div class="alergenos-grid">
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Gluten">Gluten</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Lactosa">Lactosa</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Frutos secos">Frutos secos</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Huevo">Huevo</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Pescado">Pescado</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Marisco">Marisco</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Soja">Soja</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Sésamo">Sésamo</div>
+        <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Ninguna">Ninguna</div>
       </div>
     </div>
 
+    <!-- COMMENTS -->
     <label class="field-label">Comentarios (opcional)</label>
-    <textarea class="textarea-field" id="comments" placeholder="Silla de bebé, mesa junto a la ventana..."></textarea>
+    <textarea id="comments" class="textarea-field" placeholder="¿Algo que debamos saber? (silla bebé, accesibilidad, preferencias de mesa...)"></textarea>
 
+    <!-- POLÍTICA CANCELACIÓN -->
+    <div class="policy-box">
+      <div class="policy-title">📋 Política de cancelación</div>
+      <div class="policy-text">Puedes cancelar o modificar tu reserva hasta 3 horas antes de la hora reservada. Si no puedes asistir, avísanos para liberar la mesa.</div>
+    </div>
+
+    <!-- POLÍTICAS -->
     <div class="policy-check">
-      <input type="checkbox" id="policy1" />
-      <label for="policy1">Acepto la <a href="#">Política de privacidad</a> y el tratamiento de mis datos para gestionar la reserva.</label>
+      <input type="checkbox" id="policy1">
+      <label for="policy1">Acepto la política de cancelación y me comprometo a avisar si no puedo asistir.</label>
     </div>
-    <div class="policy-check" style="margin-bottom:16px;">
-      <input type="checkbox" id="policy2" />
-      <label for="policy2">Acepto recibir comunicaciones de Etama (newsletter, promociones).</label>
-    </div>
-  </div>
-
-  <!-- STEP 4: CONFIRMACIÓN -->
-  <div class="tag" id="step3">
-    <button class="back-btn" onclick="goBack()">← Volver</button>
-    <p class="section-title">Confirma tu reserva</p>
-    <p class="section-sub">Revisa los detalles antes de confirmar</p>
-
-    <div style="background:#fff8f0;border:1px solid #f0dcc8;border-radius:14px;padding:14px 18px;margin-bottom:20px;">
-      <p style="font-size:13px;color:#6a5a3a;line-height:1.7;margin:0;">
-        ⏰ <strong>Política de cancelación:</strong> puedes cancelar o modificar hasta <strong>2 horas antes</strong> desde el email de confirmación.
-      </p>
-    </div>
-
-    <div class="confirm-card">
-      <div class="confirm-row"><span class="confirm-key">Restaurante</span><span class="confirm-val">Etama</span></div>
-      <div class="confirm-row"><span class="confirm-key">Fecha</span><span class="confirm-val" id="c-date">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Hora</span><span class="confirm-val" id="c-time">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Comensales</span><span class="confirm-val" id="c-guests">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Zona</span><span class="confirm-val" id="c-zone">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Nombre</span><span class="confirm-val" id="c-name">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Email</span><span class="confirm-val" id="c-email">—</span></div>
-      <div class="confirm-row"><span class="confirm-key">Teléfono</span><span class="confirm-val" id="c-phone">—</span></div>
-    </div>
-
-    <div class="info-banner">
-      📩 Recibirás confirmación por email en tu bandeja de entrada. Puedes cancelar hasta 2 horas antes llamando al restaurante.
+    <div class="policy-check">
+      <input type="checkbox" id="policy2">
+      <label for="policy2">He leído y acepto la <a href="#" style="color:var(--green-deep);text-decoration:underline;">política de privacidad</a>.</label>
     </div>
   </div>
 
-  <!-- STEP 5: SUCCESS -->
-  <div class="tag" id="step4">
-    <div class="success-anim">
-      <div class="success-circle">✓</div>
+  <!-- STEP 3: RESUMEN Y CONFIRMAR -->
+  <div id="step3" class="tag">
+    <button class="back-btn" onclick="goBack()">← Atrás</button>
+    <h1 class="section-title">Confirma tu reserva</h1>
+    <p class="section-sub">Revisa los detalles antes de confirmar.</p>
+
+    <div class="summary-card">
+      <div class="summary-title">Detalles de la reserva</div>
+      <div class="summary-row"><span class="summary-label">Fecha</span><span class="summary-value" id="sum-date">—</span></div>
+      <div class="summary-row"><span class="summary-label">Hora</span><span class="summary-value" id="sum-time">—</span></div>
+      <div class="summary-row"><span class="summary-label">Comensales</span><span class="summary-value" id="sum-guests">—</span></div>
+      <div class="summary-row"><span class="summary-label">Zona</span><span class="summary-value" id="sum-zone">—</span></div>
+      <div class="summary-row"><span class="summary-label">Ocasión</span><span class="summary-value" id="sum-occasion">—</span></div>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-title">Tus datos</div>
+      <div class="summary-row"><span class="summary-label">Nombre</span><span class="summary-value" id="sum-name">—</span></div>
+      <div class="summary-row"><span class="summary-label">Email</span><span class="summary-value" id="sum-email">—</span></div>
+      <div class="summary-row"><span class="summary-label">Teléfono</span><span class="summary-value" id="sum-phone">—</span></div>
+      <div class="summary-row"><span class="summary-label">Alergias</span><span class="summary-value" id="sum-alergenos">—</span></div>
+      <div class="summary-row" id="sum-comments-row" style="display:none;"><span class="summary-label">Comentarios</span><span class="summary-value" id="sum-comments">—</span></div>
+    </div>
+  </div>
+
+  <!-- STEP 4: SUCCESS -->
+  <div id="step4" class="tag">
+    <div class="success-box">
+      <div class="success-icon">✅</div>
       <h2 class="success-title">¡Reserva confirmada!</h2>
-      <p class="success-sub">Te esperamos en Etama. Hemos enviado la confirmación a <strong id="success-email"></strong></p>
-      <div class="ref-badge">
-        Referencia de reserva
-        <strong id="ref-num">ETM-000000</strong>
-      </div>
-      <div id="confirm-summary-final" style="text-align:left; background:white; border-radius:16px; padding:20px; box-shadow:var(--shadow-soft); margin-bottom:28px;"></div>
-      <button class="cta-btn" onclick="newReservation()" style="width:100%;">Hacer otra reserva</button>
+      <p class="success-ref">Tu código de reserva es <strong id="ref-code">—</strong></p>
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:28px;">Recibirás un email de confirmación con los detalles y opciones para cancelar o modificar.</p>
+      <button class="success-btn" onclick="newReservation()">Nueva reserva</button>
     </div>
   </div>
 
-</div><!-- /main -->
-
-<!-- DESKTOP SIDEBAR -->
-<div class="summary-sidebar" id="summary-sidebar">
-  <p class="sidebar-title">Tu reserva</p>
-  <div class="sidebar-row">
-    <span class="sidebar-key">📅 Fecha</span>
-    <span class="sidebar-val" id="sb-date">—</span>
-  </div>
-  <div class="sidebar-row">
-    <span class="sidebar-key">🕐 Hora</span>
-    <span class="sidebar-val" id="sb-time">—</span>
-  </div>
-  <div class="sidebar-row">
-    <span class="sidebar-key">👥 Personas</span>
-    <span class="sidebar-val" id="sb-guests">2</span>
-  </div>
-  <div class="sidebar-row">
-    <span class="sidebar-key">🪴 Zona</span>
-    <span class="sidebar-val" id="sb-zone">—</span>
-  </div>
-  <button class="sidebar-cta" onclick="nextStep()">Continuar →</button>
-  <p class="sidebar-etama">Etama · El Clot, Barcelona</p>
 </div>
 
-</div><!-- /page-layout -->
-
-<!-- Summary bar -->
+<!-- BOTTOM SUMMARY BAR -->
 <div class="summary-bar" id="summary-bar">
-  <div class="summary-inner">
-    <div class="summary-info">
-      <div class="summary-date" id="bar-date">Selecciona fecha y hora</div>
-      <div class="summary-guests" id="bar-guests"></div>
+  <div class="summary-bar-inner">
+    <div class="summary-bar-info">
+      <div class="summary-bar-date" id="bar-date">Selecciona fecha y hora</div>
+      <div class="summary-bar-guests" id="bar-guests"></div>
     </div>
     <button class="cta-btn" id="cta-btn" onclick="nextStep()">Continuar →</button>
   </div>
 </div>
 
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-spinner"></div>
+</div>
+
 <script>
 // ─────────────────────────────────────────────────────────
-// EMAIL CONFIG — rellena estos valores tras crear cuenta en emailjs.com
+// CONFIG
 // ─────────────────────────────────────────────────────────
-const EMAIL_CONFIG = {
-  serviceId:            'service_5yy5g3c',
-  templateIdRestaurant: 'template_9qp11oi',
-  templateIdClient:     'template_2d1mmh5',
-  publicKey:            'ZvrcbYXijlj1r-iGp',
-  restaurantEmail:      'gaetanomans92@gmail.com',
-};
+const EMAILJS_SERVICE    = 'service_5yy5g3c';
+const EMAILJS_TEMPLATE_R = 'template_9qp11oi';  // restaurante
+const EMAILJS_TEMPLATE_C = 'template_2d1mmh5';  // cliente
+const EMAILJS_PUBLIC_KEY = 'ZvrcbYXijlj1r-iGp';
 
-// Init EmailJS
-if (typeof emailjs !== 'undefined') {
-  try { emailjs.init({ publicKey: EMAIL_CONFIG.publicKey }); } catch(e) {}
-}
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyM4yfweAteGFbf26tTqakcYr9bezD38x-EenoFcMnHQ4n-RJ3dvMdrVgLMu6oZkfeGmQ/exec';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ─────────────────────────────────────────────────────────
+// AFORO CONFIG (critical)
+// ─────────────────────────────────────────────────────────
+const AFORO = {
+  terraza: { max: 8 },      // 8 pax máx, turno 2h
+  sala1:   { max: 8 },      // mesa 6-8 pax
+  sala2:   { max: 16 }      // 16 pax máx, turno 2h
+};
 
 // ─────────────────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────────────────
 let state = {
   step: 1,
-  date: '', time: '', guests: 2, zone: '',
-  fname: '', lname: '', email: '', phone: '', phonePrefix: '+34',
-  comments: '', policy1: false,
-  submitting: false,  // prevents double-submit
+  date: '',
+  time: '',
+  guests: 2,
+  zone: '',
+  fname: '',
+  lname: '',
+  email: '',
+  phone: '',
+  phonePrefix: '+34',
+  comments: '',
+  policy1: false,
+  submitting: false
 };
 
 const DAYS   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-const FULL   = []; // rellenar con slots completos si hace falta
-
-// ─────────────────────────────────────────────────────────
-// HORARIOS
-// ─────────────────────────────────────────────────────────
-function getSlotsForDate(dateStr) {
-  if (!dateStr) return { slots: [], closed: false, label: '', groups: [] };
-  const dow = new Date(dateStr + 'T12:00:00').getDay();
-  if (dow === 0) return { slots: [], closed: true, label: '', groups: [] };
-  const slots = [];
-  const [hStart, hEnd, lastM] = dow === 6 ? [9, 16, 0] : [11, 16, 30];
-  const todayStr = new Date().toISOString().split('T')[0];
-  const isToday = (dateStr === todayStr);
-  const now = new Date();
-  const nowMinutes = isToday ? (now.getHours() * 60 + now.getMinutes() + 30) : 0;
-  for (let h = hStart; h <= hEnd; h++) {
-    for (let m = 0; m < 60; m += 15) {
-      if (h === hEnd && m > lastM) break;
-      if (isToday && (h * 60 + m) <= nowMinutes) continue;
-      slots.push(String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0'));
-    }
-  }
-  // Group slots by franja
-  const groups = [];
-  const mediodiaSlots = slots.filter(s => parseInt(s) < 14);
-  const tardeSlots    = slots.filter(s => parseInt(s) >= 14);
-  if (mediodiaSlots.length) groups.push({ label: '🌤 Mediodía', slots: mediodiaSlots });
-  if (tardeSlots.length)    groups.push({ label: '🌅 Tarde',    slots: tardeSlots });
-  const label = dow === 6
-    ? '🌿 Sábado · 09:00–16:00'
-    : '🌿 Lunes–Viernes · 11:00–16:30';
-  return { slots, closed: false, label, groups };
-}
-
-function nextValidDate() {
-  const d = new Date();
-  if (d.getDay() === 0) d.setDate(d.getDate() + 1);
-  const pad = n => String(n).padStart(2,'0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-}
 
 // ─────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────
-(function init() {
-  const val = nextValidDate();
-  const inp = document.getElementById('date-input');
-  inp.value = val;
-  inp.min   = val;
-  inp.addEventListener('change', function() {
-    const d = new Date(this.value + 'T12:00:00');
-    if (d.getDay() === 0) {
-      showAlert('Los domingos estamos cerrados. Te hemos seleccionado el lunes.');
-      d.setDate(d.getDate() + 1);
-      const pad = n => String(n).padStart(2,'0');
-      this.value = `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    }
-    state.date = this.value;
-    state.time = '';
-    updateDayName();
-    renderSlots();
-    updateSummaryBar();
-  });
-  state.date = val;
-  updateDayName();
-  renderSlots();
-  renderStep();
-})();
+const val = nextValidDate();
+const inp = document.getElementById('date-input');
+inp.value = val;
+inp.min   = val;
+state.date = val;
+
+updateDayName();
+checkReservasOpen();
 
 // ─────────────────────────────────────────────────────────
-// RENDER SLOTS
+// CHECK IF RESERVATIONS ARE OPEN (from Google Sheets)
 // ─────────────────────────────────────────────────────────
-function renderSlots() {
-  const grid   = document.getElementById('slots-grid');
-  const banner = document.getElementById('horario-banner');
-  grid.innerHTML = '';
-  const { slots, closed, label, groups } = getSlotsForDate(state.date);
-  if (label) { banner.textContent = label; banner.style.display = ''; }
-  else        { banner.style.display = 'none'; }
-  if (closed) {
-    grid.innerHTML = '<p style="color:var(--text-light);font-size:14px;grid-column:1/-1;padding:8px 0;">Estamos cerrados los domingos. Por favor elige otro día 🌿</p>';
-    return;
+async function checkReservasOpen() {
+  try {
+    const res = await fetch(SHEETS_URL + '?action=getConfig');
+    const data = await res.json();
+    if (data.cerrado === '1') {
+      document.getElementById('closed-overlay').classList.add('active');
+    }
+  } catch (err) {
+    console.error('Error checking config:', err);
   }
-  if (!slots.length) return;
-
-  // Render grouped slots
-  (groups && groups.length ? groups : [{ label: '', slots }]).forEach(group => {
-    if (group.label) {
-      const lbl = document.createElement('div');
-      lbl.className = 'slot-group-label';
-      lbl.textContent = group.label;
-      grid.appendChild(lbl);
-    }
-    const groupGrid = document.createElement('div');
-    groupGrid.className = 'slot-group-grid';
-    group.slots.forEach(t => {
-      const btn = document.createElement('button');
-      const isFull = FULL.includes(t);
-      btn.className = 'slot-btn' + (isFull ? ' full' : '') + (state.time === t ? ' selected' : '');
-      btn.textContent = t;
-      btn.type = 'button';
-      if (!isFull) btn.addEventListener('click', function() { selectTime(t, this); });
-      groupGrid.appendChild(btn);
-    });
-    grid.appendChild(groupGrid);
-  });
 }
 
 // ─────────────────────────────────────────────────────────
-// INTERACTIONS
+// LOAD AVAILABILITY FROM GOOGLE SHEETS
 // ─────────────────────────────────────────────────────────
-function selectTime(t, el) {
-  state.time = t;
-  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-  el.classList.add('selected');
+async function loadAvailability(date, zone, guests) {
+  try {
+    const res = await fetch(SHEETS_URL + `?action=getAvailability&date=${date}&zone=${zone}&guests=${guests}`);
+    const data = await res.json();
+    return data.availability || {};  // {time: disponible (true/false)}
+  } catch (err) {
+    console.error('Error loading availability:', err);
+    return {};
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// RENDER SLOTS WITH AVAILABILITY CHECK
+// ─────────────────────────────────────────────────────────
+async function renderSlots() {
+  const container = document.getElementById('slots-container');
+  if (!state.date || !state.zone) {
+    container.innerHTML = '<p style="font-size:13px;color:var(--text-light);">Selecciona una zona para ver horarios disponibles.</p>';
+    return;
+  }
+
+  const availability = await loadAvailability(state.date, state.zone, state.guests);
+  const slots = getSlotsForDate(state.date);
+  
+  // Group by time period
+  const groups = { mediodia: [], tarde: [] };
+  slots.forEach(s => {
+    const h = parseInt(s.split(':')[0]);
+    if (h < 14) groups.mediodia.push(s);
+    else groups.tarde.push(s);
+  });
+
+  let html = '';
+  if (groups.mediodia.length) {
+    html += '<div class="slot-group"><div class="slot-group-title">🌤 Mediodía</div><div class="slots-grid">';
+    groups.mediodia.forEach(time => {
+      const isFull = availability[time] === false;
+      const sel = state.time === time ? 'selected' : '';
+      const cls = isFull ? 'slot-btn full' : `slot-btn ${sel}`;
+      const onclick = isFull ? '' : `onclick="selectTime(this)" data-time="${time}"`;
+      html += `<div class="${cls}" ${onclick}>${time}</div>`;
+    });
+    html += '</div></div>';
+  }
+  if (groups.tarde.length) {
+    html += '<div class="slot-group"><div class="slot-group-title">🌅 Tarde</div><div class="slots-grid">';
+    groups.tarde.forEach(time => {
+      const isFull = availability[time] === false;
+      const sel = state.time === time ? 'selected' : '';
+      const cls = isFull ? 'slot-btn full' : `slot-btn ${sel}`;
+      const onclick = isFull ? '' : `onclick="selectTime(this)" data-time="${time}"`;
+      html += `<div class="${cls}" ${onclick}>${time}</div>`;
+    });
+    html += '</div></div>';
+  }
+
+  container.innerHTML = html || '<p style="font-size:13px;color:var(--text-light);">No hay horarios disponibles para esta fecha.</p>';
+}
+
+function getSlotsForDate(date) {
+  const d = new Date(date + 'T12:00:00');
+  const day = d.getDay();
+  const now = new Date();
+  const isToday = date === now.toISOString().split('T')[0];
+  
+  let hours = [];
+  if (day === 0) return [];  // Domingo cerrado
+  if (day === 6) {  // Sábado
+    for (let h = 9; h < 16; h++) for (let m of [0,15,30,45]) hours.push(`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`);
+  } else {  // Lunes-Viernes
+    for (let h = 11; h < 17; h++) for (let m of [0,15,30,45]) hours.push(`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`);
+  }
+  
+  // Filter out past times if today
+  if (isToday) {
+    const cutoff = new Date(now.getTime() + 30*60000);
+    const hh = cutoff.getHours();
+    const mm = cutoff.getMinutes();
+    hours = hours.filter(t => {
+      const [th, tm] = t.split(':').map(Number);
+      return th > hh || (th === hh && tm >= mm);
+    });
+  }
+  
+  return hours;
+}
+
+// ─────────────────────────────────────────────────────────
+// UI INTERACTIONS
+// ─────────────────────────────────────────────────────────
+function onDateChange() {
+  const inp = document.getElementById('date-input');
+  let val = inp.value;
+  const d = new Date(val + 'T12:00:00');
+  
+  // Skip domingo
+  if (d.getDay() === 0) {
+    d.setDate(d.getDate() + 1);
+    val = d.toISOString().split('T')[0];
+    inp.value = val;
+    showAlert('Los domingos estamos cerrados. Te hemos seleccionado el lunes.');
+  }
+  
+  state.date = val;
+  state.time = '';  // reset time
+  updateDayName();
+  renderSlots();
   updateSummaryBar();
 }
 
 function changeGuests(delta) {
   const newVal = state.guests + delta;
-  if (newVal > 8) {
-    showAlert('Para grupos de más de 8 personas, contáctanos en gaetanomans92@gmail.com — estaremos encantados de organizarlo.');
+  if (newVal < 1 || newVal > 8) {
+    if (newVal > 8) showAlert('Para grupos de más de 8 personas, contáctanos en gaetanomans92@gmail.com — estaremos encantados de organizarlo.');
     return;
   }
-  state.guests = Math.max(1, Math.min(8, newVal));
-  document.getElementById('guests-num').textContent = state.guests;
-  document.getElementById('minus-btn').disabled = state.guests <= 1;
-  document.getElementById('plus-btn').disabled  = state.guests >= 8;
-  // Update sidebar immediately
-  const sbGuests = document.getElementById('sb-guests');
-  if (sbGuests) sbGuests.textContent = state.guests + ' persona' + (state.guests !== 1 ? 's' : '');
+  state.guests = newVal;
+  document.getElementById('guests-num').textContent = newVal;
+  document.getElementById('minus-btn').disabled = newVal === 1;
+  document.getElementById('plus-btn').disabled  = newVal === 8;
+  
+  // Re-render slots with new guest count
+  if (state.zone) renderSlots();
   updateSummaryBar();
 }
 
-function selectZone(z, el) {
-  state.zone = z;
-  document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
+function selectTime(el) {
+  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
+  state.time = el.getAttribute('data-time');
+  updateSummaryBar();
 }
 
-function toggleChip(el) {
+function selectZone(zone) {
+  document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  state.zone = zone;
+  state.time = '';  // reset time when zone changes
+  renderSlots();
+  updateSummaryBar();
+}
+
+function toggleOccasion(el) {
   el.classList.toggle('selected');
 }
 
-// ─────────────────────────────────────────────────────────
-// NAVIGATION — only allow going back, never skip forward
-// ─────────────────────────────────────────────────────────
-function goBack() {
-  if (state.step > 1) {
-    state.step--;
-    renderStep();
-    window.scrollTo({top: 0, behavior: 'smooth'});
+function toggleAlergeno(el) {
+  const val = el.getAttribute('data-val');
+  if (val === 'Ninguna') {
+    document.querySelectorAll('.alergeno-chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  } else {
+    document.querySelector('.alergeno-chip[data-val="Ninguna"]')?.classList.remove('selected');
+    el.classList.toggle('selected');
   }
 }
 
+// ─────────────────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────────────────
 function nextStep() {
-  if (state.submitting) return;
-
   if (state.step === 1) {
-    if (!state.date) { showAlert('Por favor selecciona una fecha'); return; }
-    if (!state.time) { showAlert('Por favor selecciona una hora'); return; }
-    const dow = new Date(state.date + 'T12:00:00').getDay();
-    if (dow === 0) { showAlert('Estamos cerrados los domingos. Por favor elige otro día.'); return; }
-    if (!state.zone) { showAlert('Por favor selecciona una zona'); return; }
+    if (!state.date || !state.time) return showAlert('Selecciona fecha y hora');
+    if (!state.zone) return showAlert('Selecciona una zona');
     state.step = 2;
-
   } else if (state.step === 2) {
-    const fname = document.getElementById('fname').value.trim();
-    const lname = document.getElementById('lname').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const policy = document.getElementById('policy1').checked;
-    if (!fname || !lname) { showAlert('Por favor introduce tu nombre y apellidos'); return; }
-    if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showAlert('Por favor introduce un email válido'); return; }
-    if (!phone || phone.length < 6) { showAlert('Por favor introduce un teléfono válido'); return; }
-    if (!policy) { showAlert('Debes aceptar la política de privacidad'); return; }
-    state.fname       = fname;
-    state.lname       = lname;
-    state.email       = email;
-    state.phone       = phone;
+    // Validate
+    state.fname = document.getElementById('fname').value.trim();
+    state.lname = document.getElementById('lname').value.trim();
+    state.email = document.getElementById('email').value.trim();
+    state.phone = document.getElementById('phone').value.trim();
     state.phonePrefix = document.getElementById('phone-prefix').value;
-    state.comments    = document.getElementById('comments').value.trim();
-    // Capture alergenos
-    const alergenoChips = document.querySelectorAll('.alergeno-chip.selected');
-    state.alergenos = alergenoChips.length > 0
-      ? Array.from(alergenoChips).map(c => c.textContent.trim()).join(', ')
-      : '—';
-    // Capture occasion
-    const occasionChips = document.querySelectorAll('.occasion-chip.selected');
-    state.occasion = occasionChips.length > 0
-      ? Array.from(occasionChips).map(c => c.textContent.trim()).join(', ')
-      : '—';
-    fillConfirm();
+    state.comments = document.getElementById('comments').value.trim();
+    state.policy1 = document.getElementById('policy1').checked;
+    const policy2 = document.getElementById('policy2').checked;
+    
+    if (!state.fname || !state.lname) return showAlert('Introduce tu nombre completo');
+    if (!state.email || !/\S+@\S+\.\S+/.test(state.email)) return showAlert('Introduce un email válido');
+    if (!state.phone) return showAlert('Introduce tu teléfono');
+    if (!state.policy1 || !policy2) return showAlert('Acepta las políticas para continuar');
+    
+    // Build summary
+    const d = new Date(state.date + 'T12:00:00');
+    document.getElementById('sum-date').textContent = `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    document.getElementById('sum-time').textContent = state.time + 'h';
+    document.getElementById('sum-guests').textContent = state.guests + (state.guests === 1 ? ' persona' : ' personas');
+    const zoneNames = {interior:'Interior 🪴', terraza:'Terraza ☀️', barra:'Sin preferencia 🥗'};
+    document.getElementById('sum-zone').textContent = zoneNames[state.zone] || state.zone;
+    
+    const occ = Array.from(document.querySelectorAll('.occasion-chip.selected')).map(c => c.getAttribute('data-val')).join(', ');
+    document.getElementById('sum-occasion').textContent = occ || 'Ninguna';
+    
+    document.getElementById('sum-name').textContent = state.fname + ' ' + state.lname;
+    document.getElementById('sum-email').textContent = state.email;
+    document.getElementById('sum-phone').textContent = state.phonePrefix + ' ' + state.phone;
+    
+    const alerg = Array.from(document.querySelectorAll('.alergeno-chip.selected')).map(c => c.getAttribute('data-val')).join(', ');
+    document.getElementById('sum-alergenos').textContent = alerg || 'Ninguna';
+    
+    if (state.comments) {
+      document.getElementById('sum-comments-row').style.display = '';
+      document.getElementById('sum-comments').textContent = state.comments;
+    } else {
+      document.getElementById('sum-comments-row').style.display = 'none';
+    }
+    
     state.step = 3;
-
   } else if (state.step === 3) {
-    doSubmit();
-    return;
+    confirmReservation();
   }
-
+  
   renderStep();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// ─────────────────────────────────────────────────────────
-// FILL CONFIRM SCREEN
-// ─────────────────────────────────────────────────────────
-function fillConfirm() {
-  const d = new Date(state.date + 'T12:00:00');
-  const dateStr = `${DAYS[d.getDay()]}, ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
-  const zoneNames = {interior:'Interior 🪴', terraza:'Terraza ☀️', barra:'Sin preferencia 🥗'};
-  document.getElementById('c-date').textContent   = dateStr;
-  document.getElementById('c-time').textContent   = state.time + ' h';
-  document.getElementById('c-guests').textContent = state.guests + ' comensal' + (state.guests !== 1 ? 'es' : '');
-  document.getElementById('c-zone').textContent   = zoneNames[state.zone] || state.zone;
-  document.getElementById('c-name').textContent   = state.fname + ' ' + state.lname;
-  document.getElementById('c-email').textContent  = state.email;
-  document.getElementById('c-phone').textContent  = state.phonePrefix + ' ' + state.phone;
+function goBack() {
+  if (state.step > 1) state.step--;
+  renderStep();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function nextValidDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + (d.getDay() === 0 ? 1 : 0));  // skip if today is Sunday
+  return d.toISOString().split('T')[0];
 }
 
 // ─────────────────────────────────────────────────────────
-// SUBMIT — single execution, double-click protected
+// CONFIRM RESERVATION
 // ─────────────────────────────────────────────────────────
-async function doSubmit() {
+async function confirmReservation() {
   if (state.submitting) return;
   state.submitting = true;
-  const btn = document.getElementById('cta-btn');
-  btn.disabled = true;
-  btn.textContent = 'Enviando...';
-
-  const refNum = 'ETM-' + Math.random().toString(36).substr(2,6).toUpperCase();
-
-  // Build confirm summary
+  document.getElementById('cta-btn').disabled = true;
+  document.getElementById('loading-overlay').classList.add('active');
+  
+  const ref = 'ETM-' + Date.now().toString(36).toUpperCase().slice(-6);
   const d = new Date(state.date + 'T12:00:00');
-  const zoneNames = {interior:'Interior', terraza:'Terraza', barra:'Sin preferencia'};
-  document.getElementById('confirm-summary-final').innerHTML = `
-    <div style="display:grid;gap:10px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:13px;">Fecha</span><span style="font-weight:600;font-size:14px;">${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} · ${state.time}h</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:13px;">Comensales</span><span style="font-weight:600;font-size:14px;">${state.guests}</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:13px;">Zona</span><span style="font-weight:600;font-size:14px;">${zoneNames[state.zone]||state.zone}</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:13px;">Nombre</span><span style="font-weight:600;font-size:14px;">${state.fname} ${state.lname}</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;"><span style="color:#888;font-size:13px;">Email</span><span style="font-weight:600;font-size:14px;">${state.email}</span></div>
-    </div>`;
-
-  document.getElementById('ref-num').textContent     = refNum;
-  document.getElementById('success-email').textContent = state.email;
-
-  await sendEmails(refNum);
-  await logToSheets(refNum);  // Log to Google Sheets for Make.com automation
-
-  state.step = 4;
-  state.submitting = false;
-  renderStep();
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-// ─────────────────────────────────────────────────────────
-// EMAILS via EmailJS
-// ─────────────────────────────────────────────────────────
-// ─────────────────────────────────────────────────────────
-// LOG TO GOOGLE SHEETS — for Make.com automation
-// ─────────────────────────────────────────────────────────
-async function logToSheets(refNum) {
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyM4yfweAteGFbf26tTqakcYr9bezD38x-EenoFcMnHQ4n-RJ3dvMdrVgLMu6oZkfeGmQ/exec';
-  const d = new Date(state.date + 'T12:00:00');
-  const zoneNames = {interior:'Interior', terraza:'Terraza', barra:'Sin preferencia'};
-  try {
-    // Use URLSearchParams + no-cors for GitHub Pages compatibility
-    const formData = new URLSearchParams();
-    formData.append('data', JSON.stringify({
-        ref:       refNum,
-        date:      state.date,
-        dateStr:   `${DAYS[d.getDay()]} ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`,
-        time:      state.time,
-        guests:    state.guests,
-        zone:      zoneNames[state.zone] || state.zone,
-        fname:     state.fname,
-        lname:     state.lname,
-        name:      state.fname + ' ' + state.lname,
-        email:     state.email,
-        phone:     state.phonePrefix + ' ' + state.phone,
-        alergenos: state.alergenos || '—',
-        occasion:  state.occasion  || '—',
-        comments:  state.comments  || '—',
-        timestamp: new Date().toISOString(),
-    }));
-    await fetch(SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData,
-    });
-  } catch(e) {
-    console.warn('Sheet logging failed (non-critical):', e);
-  }
-}
-
-async function sendEmails(refNum) {
-  if (EMAIL_CONFIG.serviceId === 'YOUR_SERVICE_ID') {
-    console.warn('EmailJS no configurado — omitiendo envío de email');
-    return;
-  }
-  const d = new Date(state.date + 'T12:00:00');
-  const zoneNames = {interior:'Interior', terraza:'Terraza', barra:'Sin preferencia'};
-  const dateStr = `${DAYS[d.getDay()]} ${d.getDate()} de ${MONTHS[d.getMonth()]} de ${d.getFullYear()}`;
+  const dateStr = `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+  const occasion = Array.from(document.querySelectorAll('.occasion-chip.selected')).map(c => c.getAttribute('data-val')).join(', ') || '—';
+  const alergenos = Array.from(document.querySelectorAll('.alergeno-chip.selected')).map(c => c.getAttribute('data-val')).join(', ') || 'Ninguna';
+  
   const payload = {
-    ref:      refNum,
-    date:     dateStr,
-    time:     state.time,
-    guests:   String(state.guests),
-    zone:     zoneNames[state.zone] || state.zone,
-    name:     state.fname + ' ' + state.lname,
-    fname:    state.fname,
-    lname:    state.lname,
-    email:    state.email,
-    phone:    (state.phone.startsWith('+') ? state.phone : state.phonePrefix + ' ' + state.phone),
+    ref,
+    date: state.date,
+    dateStr,
+    time: state.time,
+    guests: state.guests.toString(),
+    zone: state.zone,
+    fname: state.fname,
+    lname: state.lname,
+    name: state.fname + ' ' + state.lname,
+    email: state.email,
+    phone: state.phonePrefix + ' ' + state.phone,
+    alergenos,
+    occasion,
     comments: state.comments || '—',
-    alergenos: state.alergenos || '—',
-    occasion:  state.occasion  || '—',
-    to_name:   state.fname,
+    timestamp: new Date().toISOString()
   };
+  
   try {
-    await emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateIdRestaurant, {
-      ...payload, to_email: EMAIL_CONFIG.restaurantEmail,
-    });
-    await emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.templateIdClient, {
-      ...payload, to_email: state.email, to_name: state.fname,
-    });
-  } catch(err) {
-    console.error('Error EmailJS:', err);
-    // No bloqueamos al usuario aunque falle el email
+    // Save to Google Sheets
+    const form = new URLSearchParams();
+    form.append('data', JSON.stringify(payload));
+    await fetch(SHEETS_URL, {method: 'POST', body: form});
+    
+    // Send emails
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE_R, payload);
+    await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE_C, payload);
+    
+    // Success
+    document.getElementById('ref-code').textContent = ref;
+    state.step = 4;
+    renderStep();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  } catch (err) {
+    console.error('Error:', err);
+    showAlert('Hubo un error al confirmar tu reserva. Por favor, inténtalo de nuevo.');
+  } finally {
+    state.submitting = false;
+    document.getElementById('cta-btn').disabled = false;
+    document.getElementById('loading-overlay').classList.remove('active');
   }
 }
 
@@ -1393,10 +943,8 @@ async function sendEmails(refNum) {
 // NEW RESERVATION — full reset
 // ─────────────────────────────────────────────────────────
 function newReservation() {
-  // Reset state
   state = { step:1, date:'', time:'', guests:2, zone:'', fname:'', lname:'', email:'', phone:'', phonePrefix:'+34', comments:'', policy1:false, submitting:false };
-
-  // Reset form fields
+  
   ['fname','lname','email','phone','comments'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
@@ -1404,25 +952,20 @@ function newReservation() {
   document.getElementById('policy1').checked = false;
   document.getElementById('policy2').checked = false;
   document.getElementById('phone-prefix').value = '+34';
-
-  // Reset chips
+  
   document.querySelectorAll('.occasion-chip, .alergeno-chip').forEach(c => c.classList.remove('selected'));
-
-  // Reset zone cards
   document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
-
-  // Reset guests
+  
   document.getElementById('guests-num').textContent = '2';
   document.getElementById('minus-btn').disabled = true;
   document.getElementById('plus-btn').disabled  = false;
-
-  // Reset date
+  
   const val = nextValidDate();
   const inp = document.getElementById('date-input');
   inp.value = val;
   inp.min   = val;
   state.date = val;
-
+  
   updateDayName();
   renderSlots();
   renderStep();
@@ -1433,12 +976,10 @@ function newReservation() {
 // RENDER STEP — UI sync
 // ─────────────────────────────────────────────────────────
 function renderStep() {
-  // Show/hide panels (steps 1-3 + success step4)
   [1,2,3,4].forEach(n => {
     const el = document.getElementById('step' + n);
     if (el) el.className = state.step === n ? 'tag active' : 'tag';
   });
-  // Step indicators
   [1,2,3].forEach(n => {
     const ind = document.getElementById('step-ind-' + n);
     if (!ind) return;
@@ -1446,7 +987,7 @@ function renderStep() {
     else if (n === state.step) ind.className = 'step active';
     else                       ind.className = 'step inactive';
   });
-  // Summary bar
+  
   const bar = document.getElementById('summary-bar');
   if (state.step === 4) { bar.style.display = 'none'; return; }
   bar.style.display = '';
@@ -1471,20 +1012,6 @@ function updateSummaryBar() {
     barDate.textContent   = 'Selecciona fecha y hora';
     barGuests.textContent = '';
   }
-  // Update desktop sidebar
-  const zoneNames = {interior:'Interior 🪴', terraza:'Terraza ☀️', barra:'Sin preferencia 🥗'};
-  const sbDate   = document.getElementById('sb-date');
-  const sbTime   = document.getElementById('sb-time');
-  const sbGuests = document.getElementById('sb-guests');
-  const sbZone   = document.getElementById('sb-zone');
-  const sbCta    = document.querySelector('.sidebar-cta');
-  if (sbDate) {
-    if (state.date) { const d = new Date(state.date + 'T12:00:00'); sbDate.textContent = `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`; }
-    if (sbTime)   sbTime.textContent   = state.time   ? state.time + 'h' : '—';
-    if (sbGuests) sbGuests.textContent = state.guests + ' persona' + (state.guests !== 1 ? 's' : '');
-    if (sbZone)   sbZone.textContent   = state.zone ? (zoneNames[state.zone] || state.zone) : '—';
-    if (sbCta)    sbCta.textContent    = state.step === 3 ? '✓ Confirmar reserva' : 'Continuar →';
-  }
 }
 
 function updateDayName() {
@@ -1495,7 +1022,6 @@ function updateDayName() {
 }
 
 function showAlert(msg) {
-  // Native alert works everywhere; can be replaced with a custom toast
   alert(msg);
 }
 
@@ -1505,7 +1031,7 @@ function showAlert(msg) {
 renderStep();
 
 // ─────────────────────────────────────────────────────────
-// MODIFICATION MODE — banner when coming from gestionar
+// MODIFICATION MODE
 // ─────────────────────────────────────────────────────────
 (function() {
   const params = new URLSearchParams(window.location.search);
@@ -1520,36 +1046,35 @@ renderStep();
 })();
 
 // ─────────────────────────────────────────────────────────
-// ADMIN — open/close reservations via ?admin=1
+// ADMIN — open/close reservations
 // ─────────────────────────────────────────────────────────
-const STORAGE_KEY = 'etama_reservas_closed';
-
-function adminToggle() {
-  const isClosed = localStorage.getItem(STORAGE_KEY) === '1';
-  if (isClosed) {
-    localStorage.removeItem(STORAGE_KEY);
-    document.getElementById('closed-overlay').classList.remove('active');
-    document.getElementById('admin-toggle-btn').textContent = '⏸ Pausar reservas';
-    document.getElementById('admin-toggle-btn').style.background = 'var(--green-deep)';
-  } else {
-    localStorage.setItem(STORAGE_KEY, '1');
-    document.getElementById('closed-overlay').classList.add('active');
-    document.getElementById('admin-toggle-btn').textContent = '▶ Reabrir reservas';
-    document.getElementById('admin-toggle-btn').style.background = '#8b0000';
+async function adminToggle() {
+  const overlay = document.getElementById('closed-overlay');
+  const isClosed = overlay.classList.contains('active');
+  
+  try {
+    const action = isClosed ? 'open' : 'close';
+    await fetch(SHEETS_URL + `?action=setConfig&cerrado=${isClosed ? '0' : '1'}`);
+    
+    if (isClosed) {
+      overlay.classList.remove('active');
+      document.getElementById('admin-toggle-btn').textContent = '⏸ Pausar reservas';
+      document.getElementById('admin-toggle-btn').style.background = 'var(--green-deep)';
+    } else {
+      overlay.classList.add('active');
+      document.getElementById('admin-toggle-btn').textContent = '▶ Reabrir reservas';
+      document.getElementById('admin-toggle-btn').style.background = '#8b0000';
+    }
+  } catch (err) {
+    console.error('Error toggling reservations:', err);
+    showAlert('Error al cambiar el estado de las reservas');
   }
 }
 
 // Check on load
 (function() {
-  // Show admin bar if ?admin=1 in URL
   if (window.location.search.includes('admin=1')) {
     document.getElementById('admin-bar').style.display = 'block';
-  }
-  // Check if reservations are closed
-  if (localStorage.getItem(STORAGE_KEY) === '1') {
-    document.getElementById('closed-overlay').classList.add('active');
-    const btn = document.getElementById('admin-toggle-btn');
-    if (btn) { btn.textContent = '▶ Reabrir reservas'; btn.style.background = '#8b0000'; }
   }
 })();
 
