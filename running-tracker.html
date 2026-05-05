@@ -186,7 +186,10 @@
     <div id="timer">00:00:00</div>
     <div class="hd-right">
       <div id="gps-acc">GPS –</div>
-      <div id="voice-state">&#x1F50A; Voz</div>
+      <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px">
+        <span id="lock-icon" style="font-size:11px" title="Pantalla encendida">🔓</span>
+        <div id="voice-state">&#x1F50A; Voz</div>
+      </div>
     </div>
   </header>
 
@@ -504,20 +507,69 @@ function voiceCheck() {
 }
 
 // ─────────────────────────────────────────────────────────
-// Wake Lock — mantiene la pantalla encendida en iOS 16.4+
-// BUG-FIX #5: iOS mata el GPS cuando se apaga la pantalla
+// PANTALLA SIEMPRE ENCENDIDA — doble mecanismo:
+//   1) Wake Lock API  (iOS 16.4+ / Safari 16.4+)
+//   2) AudioContext silencioso — fallback que funciona en
+//      todas las versiones de iOS Safari (necesita gesto).
+//      Es el mismo truco que usa NoSleep.js.
 // ─────────────────────────────────────────────────────────
-let wakeLock = null;
-async function requestWakeLock() {
-  if (!('wakeLock' in navigator)) return;
-  try { wakeLock = await navigator.wakeLock.request('screen'); } catch(_) {}
+let wakeLock   = null;
+let audioCtx   = null;
+let gainNode   = null;
+
+async function enableScreenOn() {
+  // ── 1) Wake Lock API ──────────────────────────────────
+  if ('wakeLock' in navigator) {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => {
+        // iOS puede liberarlo al cambiar de app; re-adquirimos al volver
+        wakeLock = null;
+      });
+    } catch(_) {}
+  }
+
+  // ── 2) AudioContext silencioso (fallback / refuerzo) ──
+  // Crea un oscilador a volumen 0 — iOS no duerme la pantalla
+  // mientras hay audio activo, aunque sea inaudible.
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      gainNode = audioCtx.createGain();
+      gainNode.gain.value = 0.001; // inaudible pero "activo"
+      gainNode.connect(audioCtx.destination);
+    }
+    if (audioCtx.state === 'suspended') await audioCtx.resume();
+    // Nodo vacío que mantiene el contexto vivo
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate, audioCtx.sampleRate);
+    const src = audioCtx.createBufferSource();
+    src.buffer = buf; src.loop = true;
+    src.connect(gainNode);
+    src.start();
+    // Guardamos referencia para detenerlo al parar
+    enableScreenOn._src = src;
+  } catch(_) {}
+
+  updateLockIcon(true);
 }
-function releaseWakeLock() {
+
+function disableScreenOn() {
   if (wakeLock) { wakeLock.release(); wakeLock = null; }
+  try {
+    if (enableScreenOn._src) { enableScreenOn._src.stop(); enableScreenOn._src = null; }
+    if (audioCtx)            { audioCtx.suspend(); }
+  } catch(_) {}
+  updateLockIcon(false);
 }
-// Re-adquirir si el sistema lo libera (p.ej. al volver de otra app)
+
+function updateLockIcon(on) {
+  const el = document.getElementById('lock-icon');
+  if (el) el.textContent = on ? '🔒' : '🔓';
+}
+
+// Re-adquirir Wake Lock al volver al primer plano
 document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible' && S.running) requestWakeLock();
+  if (document.visibilityState === 'visible' && S.running) enableScreenOn();
 });
 
 // ─────────────────────────────────────────────────────────
@@ -539,7 +591,7 @@ function startRun() {
     document.getElementById('btn-start').style.display = 'none';
     S.timerIv = setInterval(tick, 500);
     startGPS();
-    requestWakeLock();
+    enableScreenOn();
     speak('Reanudando carrera');
     return;
   }
@@ -567,7 +619,7 @@ function startRun() {
 
   S.timerIv = setInterval(tick, 500);
   startGPS();
-  requestWakeLock();
+  enableScreenOn();
   speak('Carrera iniciada. ¡Buena suerte!');
 }
 
@@ -578,7 +630,7 @@ function pauseRun() {
   S.running = false;
   clearInterval(S.timerIv);
   stopGPS();
-  releaseWakeLock();
+  disableScreenOn();
   document.getElementById('status-dot').className = 'paused';
   document.getElementById('btn-pause').style.display = 'none';
   document.getElementById('btn-start').textContent = '▶ Reanudar';
@@ -593,7 +645,7 @@ function stopRun() {
   S.paused  = false;
   clearInterval(S.timerIv);
   stopGPS();
-  releaseWakeLock();
+  disableScreenOn();
 
   document.getElementById('status-dot').className = '';
   document.getElementById('btn-start').textContent = '▶ Iniciar';
