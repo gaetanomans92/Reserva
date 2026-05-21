@@ -595,7 +595,7 @@ const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx5srpfbjsydOMT9Hwsl
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
 // ─────────────────────────────────────────────────────────
-// UTM TRACKING (v3.0 — captura origen del tráfico)
+// UTM TRACKING (v3.0.2 — captura origen + bugfix phone con dual field)
 // Captura UTMs de la URL al cargar y los guarda en sessionStorage.
 // Se inyectan en el payload al confirmar la reserva.
 // ─────────────────────────────────────────────────────────
@@ -955,6 +955,7 @@ async function confirmReservation() {
     name: state.fname + ' ' + state.lname,
     email: state.email,
     phone: state.phonePrefix + ' ' + state.phone,
+    phone_sheet: "'" + state.phonePrefix + ' ' + state.phone,
     alergenos,
     occasion,
     comments: state.comments || '—',
