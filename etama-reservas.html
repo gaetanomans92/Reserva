@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Etama · Reservar Mesa</title>
- 
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
     /* ─── CUSTOM FONTS (hosted on GitHub) ─── */
@@ -36,8 +36,8 @@
     font-style: normal;
     font-display: swap;
   }
- 
- 
+
+
   :root {
     /* ── PALETA OFICIAL ETAMA (Manual de Marca) ── */
     --green-deep:   #145957;   /* Verde Profundo */
@@ -59,9 +59,9 @@
     --radius-xs:    8px;
     --transition:   all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   }
- 
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
- 
+
   body {
     font-family: 'Museo Sans', sans-serif;
     background: var(--cream);
@@ -69,7 +69,7 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
- 
+
   /* ─── RESERVAS CERRADAS ─── */
   .closed-overlay {
     display: none;
@@ -79,11 +79,10 @@
     flex-direction: column; text-align: center; padding: 40px;
   }
   .closed-overlay.active { display: flex; }
-  .closed-logo { height: 52px; margin-bottom: 32px; filter: brightness(0) invert(1); opacity: 0.9; }
   .closed-icon { font-size: 48px; margin-bottom: 20px; }
   .closed-title { font-family: 'IBM Plex Mono', monospace; font-size: 36px; font-weight: 300; color: white; margin-bottom: 12px; letter-spacing: 0.02em; }
   .closed-sub { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 360px; }
- 
+
   /* ─── HERO ─── */
   .hero {
     background: linear-gradient(160deg, #0a3332 0%, var(--green-deep) 55%, var(--green-mid) 100%);
@@ -108,7 +107,7 @@
   .hero-subtitle { color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
   .stars { color: var(--sand); font-size: 14px; margin-bottom: 4px; letter-spacing: 2px; }
   .reviews { color: rgba(255,255,255,0.35); font-size: 12px; }
- 
+
   /* ─── STEPS BAR ─── */
   .steps-container {
     background: white;
@@ -136,7 +135,7 @@
   .step-label { font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-light); }
   .step.active .step-label { color: var(--green-deep); }
   .step.done .step-label { color: var(--green-light); }
- 
+
   /* ─── MAIN ─── */
   .main { max-width: 540px; margin: 0 auto; padding: 36px 20px 120px; }
   .section-title {
@@ -145,7 +144,7 @@
     margin-bottom: 6px; line-height: 1.2; letter-spacing: -0.01em;
   }
   .section-sub { font-size: 13px; color: var(--text-light); margin-bottom: 28px; line-height: 1.5; }
- 
+
   /* ─── INPUTS ─── */
   .input-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
   .input-group label,
@@ -176,7 +175,7 @@
   .textarea-field:focus { border-color: var(--green-light); box-shadow: 0 0 0 4px rgba(82,183,136,0.12); }
   .textarea-field::placeholder { color: var(--text-light); }
   .date-hint { font-size: 11px; color: var(--text-light); margin-top: 5px; padding-left: 2px; letter-spacing: 0.2px; }
- 
+
   /* ─── GUESTS ─── */
   .guests-row {
     display: flex; align-items: center; justify-content: space-between;
@@ -196,7 +195,7 @@
   }
   .guests-btn:not(:disabled):hover { background: var(--green-pale); border-color: var(--green-light); color: var(--green-deep); }
   .guests-btn:disabled { opacity: 0.3; cursor: not-allowed; }
- 
+
   /* ─── TIME SLOTS (GROUPED) ─── */
   .slot-group { margin-bottom: 30px; }
   .slot-group-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-mid); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
@@ -213,7 +212,7 @@
   .slot-btn.selected { background: var(--green-deep); color: white; border-color: var(--green-deep); }
   .slot-btn.full { background: var(--cream-dark); color: var(--text-light); opacity: 0.5; cursor: not-allowed; }
   .slot-btn.full:hover { border-color: var(--cream-dark); background: var(--cream-dark); }
- 
+
   /* ─── ZONES ─── */
   .zone-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 30px; }
   .zone-card {
@@ -226,7 +225,7 @@
   .zone-card.selected { background: var(--green-deep); color: white; border-color: var(--green-deep); }
   .zone-icon { font-size: 32px; }
   .zone-name { font-size: 13px; font-weight: 600; }
- 
+
   /* ─── OCCASION CHIPS ─── */
   .occasion-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
   .occasion-chip {
@@ -237,7 +236,7 @@
   }
   .occasion-chip:hover { border-color: var(--green-light); background: var(--green-pale); }
   .occasion-chip.selected { background: var(--green-light); color: var(--green-deep); border-color: var(--green-light); }
- 
+
   /* ─── ALERGENOS ─── */
   .alergenos-box {
     background: var(--cream-card); border: 1.5px solid var(--cream-dark);
@@ -254,7 +253,7 @@
   }
   .alergeno-chip:hover { border-color: var(--green-light); background: var(--green-pale); }
   .alergeno-chip.selected { background: var(--green-light); color: var(--green-deep); border-color: var(--green-light); }
- 
+
   /* ─── POLICIES ─── */
   .policy-box {
     background: #fff8f0; border: 1.5px solid #f0dcc8;
@@ -272,7 +271,8 @@
     accent-color: var(--green-deep);
   }
   .policy-check label { font-size: 12px; color: var(--text-mid); line-height: 1.6; cursor: pointer; flex: 1; }
- 
+  .policy-optional { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); display: block; margin-top: 6px; }
+
   /* ─── SUMMARY (STEP 3) ─── */
   .summary-card {
     background: white; border: 1.5px solid var(--cream-dark);
@@ -284,7 +284,7 @@
   .summary-row:last-child { border-bottom: none; }
   .summary-label { font-size: 12px; color: var(--text-light); }
   .summary-value { font-size: 13px; font-weight: 600; color: var(--text-dark); }
- 
+
   /* ─── SUCCESS (STEP 4) ─── */
   .success-box {
     background: white; border-radius: var(--radius);
@@ -300,7 +300,7 @@
     cursor: pointer; transition: var(--transition);
   }
   .success-btn:hover { background: var(--green-mid); }
- 
+
   /* ─── BOTTOM BAR ─── */
   .summary-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -319,23 +319,23 @@
   }
   .cta-btn:hover:not(:disabled) { background: var(--green-mid); transform: translateY(-1px); }
   .cta-btn:disabled { opacity: 0.4; cursor: not-allowed; }
- 
+
   /* ─── TAGS (show/hide steps) ─── */
   .tag { display: none; }
   .tag.active { display: block; }
- 
+
   /* ─── RESPONSIVE ─── */
   @media (max-width: 480px) {
     .section-title { font-size: 24px; }
     .slots-grid { grid-template-columns: repeat(2, 1fr); }
     .zone-grid { grid-template-columns: 1fr; }
   }
- 
+
   /* ─── PHONE PREFIX ─── */
   .phone-group { display: flex; gap: 10px; }
   .phone-prefix { flex: 0 0 90px; }
   .phone-number { flex: 1; }
- 
+
   /* ─── BACK BUTTON ─── */
   .back-btn {
     background: none; border: none; color: var(--text-mid);
@@ -344,7 +344,7 @@
     transition: var(--transition);
   }
   .back-btn:hover { color: var(--green-deep); }
- 
+
   /* ─── LOADING OVERLAY ─── */
   .loading-overlay {
     display: none;
@@ -361,11 +361,11 @@
     animation: spin 0.8s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
- 
+
 </style>
 </head>
 <body>
- 
+
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
@@ -375,7 +375,7 @@
     <p class="reviews">5.0 · 103 reseñas en Google</p>
   </div>
 </div>
- 
+
 <!-- STEPS BAR -->
 <div class="steps-container">
   <div class="steps">
@@ -393,24 +393,24 @@
     </div>
   </div>
 </div>
- 
+
 <!-- MAIN CONTENT -->
 <div class="main">
- 
+
   <!-- STEP 1: FECHA, HORA, COMENSALES, ZONA, OCASIÓN -->
   <div id="step1" class="tag active">
     <h1 class="section-title">¿Cuándo queréis venir?</h1>
     <p class="section-sub">Selecciona la fecha, hora y número de comensales.</p>
- 
+
     <!-- DATE -->
     <div class="input-group">
       <label for="date-input">Fecha</label>
       <input type="date" id="date-input" class="input-field" onchange="onDateChange()">
       <p class="date-hint">(cerramos los domingos)</p>
     </div>
- 
+
     <p id="day-name" style="font-size:14px;color:var(--text-mid);margin-bottom:16px;font-weight:500;"></p>
- 
+
     <!-- GUESTS -->
     <div class="guests-row">
       <span class="guests-label">Comensales</span>
@@ -420,10 +420,10 @@
         <button class="guests-btn" id="plus-btn" onclick="changeGuests(1)">+</button>
       </div>
     </div>
- 
+
     <!-- TIME SLOTS (GROUPED) -->
     <div id="slots-container"></div>
- 
+
     <!-- ZONE -->
     <label class="field-label" style="margin-top:24px;">Zona</label>
     <div class="zone-grid">
@@ -440,7 +440,7 @@
         <div class="zone-name">Sin preferencia</div>
       </div>
     </div>
- 
+
     <!-- OCASIÓN ESPECIAL -->
     <label class="field-label">Ocasión especial (opcional)</label>
     <div class="occasion-row">
@@ -451,28 +451,28 @@
       <div class="occasion-chip" onclick="toggleOccasion(this)" data-val="Celebración">🎉 Celebración</div>
     </div>
   </div>
- 
+
   <!-- STEP 2: DATOS PERSONALES -->
   <div id="step2" class="tag">
     <button class="back-btn" onclick="goBack()">← Atrás</button>
     <h1 class="section-title">Tus datos</h1>
     <p class="section-sub">Necesitamos tus datos para confirmar la reserva.</p>
- 
+
     <div class="input-group">
       <label for="fname">Nombre</label>
       <input type="text" id="fname" class="input-field" placeholder="Tu nombre">
     </div>
- 
+
     <div class="input-group">
       <label for="lname">Apellido</label>
       <input type="text" id="lname" class="input-field" placeholder="Tu apellido">
     </div>
- 
+
     <div class="input-group">
       <label for="email">Email</label>
       <input type="email" id="email" class="input-field" placeholder="tu@email.com">
     </div>
- 
+
     <div class="input-group">
       <label>Teléfono</label>
       <div class="phone-group">
@@ -487,7 +487,7 @@
         <input type="tel" id="phone" class="input-field phone-number" placeholder="631 17 98 08">
       </div>
     </div>
- 
+
     <!-- ALERGENOS -->
     <div class="alergenos-box">
       <div class="alergenos-title">⚠️ Alergias o intolerancias</div>
@@ -504,17 +504,17 @@
         <div class="alergeno-chip" onclick="toggleAlergeno(this)" data-val="Ninguna">Ninguna</div>
       </div>
     </div>
- 
+
     <!-- COMMENTS -->
     <label class="field-label">Comentarios (opcional)</label>
     <textarea id="comments" class="textarea-field" placeholder="¿Algo que debamos saber? (silla bebé, accesibilidad, preferencias de mesa...)"></textarea>
- 
+
     <!-- POLÍTICA CANCELACIÓN -->
     <div class="policy-box">
       <div class="policy-title">📋 Política de cancelación</div>
       <div class="policy-text">Puedes cancelar o modificar tu reserva hasta 3 horas antes de la hora reservada. Si no puedes asistir, avísanos para liberar la mesa.</div>
     </div>
- 
+
     <!-- POLÍTICAS -->
     <div class="policy-check">
       <input type="checkbox" id="policy1">
@@ -522,16 +522,21 @@
     </div>
     <div class="policy-check">
       <input type="checkbox" id="policy2">
-            <label for="policy2">He leído y acepto la <a href="https://etama.es/politica-de-privacidad" target="_blank" rel="noopener" style="color:var(--green-deep);text-decoration:underline;">política de privacidad</a>.</label>
+      <label for="policy2">He leído y acepto la <a href="https://etama.es/politica-de-privacidad" target="_blank" rel="noopener" style="color:var(--green-deep);text-decoration:underline;">política de privacidad</a>.</label>
+    </div>
+    <div class="policy-check">
+      <input type="checkbox" id="policy3">
+      <label for="policy3">Acepto recibir comunicaciones de Etama por email y WhatsApp: novedades, promociones y una solicitud de opinión tras mi visita. Puedo darme de baja en cualquier momento.
+      <span class="policy-optional">Opcional · no afecta a tu reserva</span></label>
     </div>
   </div>
- 
+
   <!-- STEP 3: RESUMEN Y CONFIRMAR -->
   <div id="step3" class="tag">
     <button class="back-btn" onclick="goBack()">← Atrás</button>
     <h1 class="section-title">Confirma tu reserva</h1>
     <p class="section-sub">Revisa los detalles antes de confirmar.</p>
- 
+
     <div class="summary-card">
       <div class="summary-title">Detalles de la reserva</div>
       <div class="summary-row"><span class="summary-label">Fecha</span><span class="summary-value" id="sum-date">—</span></div>
@@ -540,7 +545,7 @@
       <div class="summary-row"><span class="summary-label">Zona</span><span class="summary-value" id="sum-zone">—</span></div>
       <div class="summary-row"><span class="summary-label">Ocasión</span><span class="summary-value" id="sum-occasion">—</span></div>
     </div>
- 
+
     <div class="summary-card">
       <div class="summary-title">Tus datos</div>
       <div class="summary-row"><span class="summary-label">Nombre</span><span class="summary-value" id="sum-name">—</span></div>
@@ -548,9 +553,10 @@
       <div class="summary-row"><span class="summary-label">Teléfono</span><span class="summary-value" id="sum-phone">—</span></div>
       <div class="summary-row"><span class="summary-label">Alergias</span><span class="summary-value" id="sum-alergenos">—</span></div>
       <div class="summary-row" id="sum-comments-row" style="display:none;"><span class="summary-label">Comentarios</span><span class="summary-value" id="sum-comments">—</span></div>
+      <div class="summary-row"><span class="summary-label">Comunicaciones</span><span class="summary-value" id="sum-consent">—</span></div>
     </div>
   </div>
- 
+
   <!-- STEP 4: SUCCESS -->
   <div id="step4" class="tag">
     <div class="success-box">
@@ -562,9 +568,9 @@
       <button class="success-btn" onclick="newReservation()">Nueva reserva</button>
     </div>
   </div>
- 
+
 </div>
- 
+
 <!-- BOTTOM SUMMARY BAR -->
 <div class="summary-bar" id="summary-bar">
   <div class="summary-bar-inner">
@@ -575,12 +581,29 @@
     <button class="cta-btn" id="cta-btn" onclick="nextStep()">Continuar →</button>
   </div>
 </div>
- 
+
 <!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loading-overlay">
   <div class="loading-spinner"></div>
 </div>
- 
+
+<!-- ADMIN: RESERVAS CERRADAS OVERLAY -->
+<div class="closed-overlay" id="closed-overlay">
+  <div class="closed-icon">🌿</div>
+  <p class="closed-title">Reservas pausadas</p>
+  <p class="closed-sub">En este momento no estamos aceptando nuevas reservas online.<br>Puedes contactarnos por WhatsApp al <strong>+34 614 14 36 45</strong> para más información.</p>
+</div>
+
+<!-- ADMIN BUTTON (solo visible en ?admin=1) -->
+<div id="admin-bar" style="display:none;position:fixed;bottom:24px;right:24px;z-index:99999;">
+  <button id="admin-toggle-btn" onclick="adminToggle()" style="
+    background:var(--green-deep);color:white;border:none;border-radius:50px;
+    padding:14px 24px;font-family:'Museo Sans',sans-serif;font-size:14px;
+    font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.3);
+    letter-spacing:0.5px;
+  ">⏸ Pausar reservas</button>
+</div>
+
 <script>
 // ─────────────────────────────────────────────────────────
 // CONFIG
@@ -589,9 +612,13 @@ const EMAILJS_SERVICE    = 'service_5yy5g3c';
 const EMAILJS_TEMPLATE_R = 'template_9qp11oi';  // restaurante
 const EMAILJS_TEMPLATE_C = 'template_2d1mmh5';  // cliente
 const EMAILJS_PUBLIC_KEY = 'ZvrcbYXijlj1r-iGp';
- 
+
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx5srpfbjsydOMT9Hwsl_ZWndd6od5jMl-J4aYLOUvY9NZPc2kczHnX8ddl-Y8XzcA/exec';
- 
+
+// Versión del texto de consentimiento de comunicaciones.
+// Si cambias la redacción del checkbox policy3, sube este valor.
+const CONSENT_VERSION = 'v1-2026-08-27';
+
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
 // ─────────────────────────────────────────────────────────
@@ -631,7 +658,7 @@ function getStoredUTMs() {
 }
 
 captureUTMs();
- 
+
 // ─────────────────────────────────────────────────────────
 // AFORO CONFIG (critical)
 // ─────────────────────────────────────────────────────────
@@ -640,7 +667,7 @@ const AFORO = {
   sala1:   { max: 8 },      // mesa 6-8 pax
   sala2:   { max: 16 }      // 16 pax máx, turno 2h
 };
- 
+
 // ─────────────────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────────────────
@@ -657,12 +684,13 @@ let state = {
   phonePrefix: '+34',
   comments: '',
   policy1: false,
+  consentComms: 'NO',
   submitting: false
 };
- 
+
 const DAYS   = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
- 
+
 // ─────────────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────────────
@@ -671,10 +699,10 @@ const inp = document.getElementById('date-input');
 inp.value = val;
 inp.min   = val;
 state.date = val;
- 
+
 updateDayName();
 checkReservasOpen();
- 
+
 // ─────────────────────────────────────────────────────────
 // CHECK IF RESERVATIONS ARE OPEN (from Google Sheets)
 // ─────────────────────────────────────────────────────────
@@ -689,7 +717,7 @@ async function checkReservasOpen() {
     console.error('Error checking config:', err);
   }
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // LOAD AVAILABILITY FROM GOOGLE SHEETS
 // ─────────────────────────────────────────────────────────
@@ -703,7 +731,7 @@ async function loadAvailability(date, zone, guests) {
     return {};
   }
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // RENDER SLOTS WITH AVAILABILITY CHECK
 // ─────────────────────────────────────────────────────────
@@ -713,12 +741,12 @@ async function renderSlots() {
     container.innerHTML = '<p style="font-size:13px;color:var(--text-light);">Selecciona una zona para ver horarios disponibles.</p>';
     return;
   }
- 
+
   container.innerHTML = '<p style="font-size:13px;color:var(--text-light);padding:16px 0;">Cargando horarios disponibles...</p>';
- 
+
   const availability = await loadAvailability(state.date, state.zone, state.guests);
   const slots = getSlotsForDate(state.date);
-  
+
   // Group by time period
   const groups = { mediodia: [], tarde: [] };
   slots.forEach(s => {
@@ -726,7 +754,7 @@ async function renderSlots() {
     if (h < 14) groups.mediodia.push(s);
     else groups.tarde.push(s);
   });
- 
+
   let html = '';
   if (groups.mediodia.length) {
     html += '<div class="slot-group"><div class="slot-group-title">🌤 Mediodía</div><div class="slots-grid">';
@@ -750,16 +778,16 @@ async function renderSlots() {
     });
     html += '</div></div>';
   }
- 
+
   container.innerHTML = html || '<p style="font-size:13px;color:var(--text-light);">No hay horarios disponibles para esta fecha.</p>';
 }
- 
+
 function getSlotsForDate(date) {
   const d = new Date(date + 'T12:00:00');
   const day = d.getDay();
   const now = new Date();
   const isToday = date === now.toISOString().split('T')[0];
-  
+
   let hours = [];
   if (day === 0) return [];  // Domingo cerrado
   if (day === 6) {  // Sábado
@@ -767,7 +795,7 @@ function getSlotsForDate(date) {
   } else {  // Lunes-Viernes
     for (let h = 11; h < 17; h++) for (let m of [0,15,30,45]) hours.push(`${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`);
   }
-  
+
   // Filter out past times if today
   if (isToday) {
     const cutoff = new Date(now.getTime() + 30*60000);
@@ -778,10 +806,10 @@ function getSlotsForDate(date) {
       return th > hh || (th === hh && tm >= mm);
     });
   }
-  
+
   return hours;
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // UI INTERACTIONS
 // ─────────────────────────────────────────────────────────
@@ -789,7 +817,7 @@ function onDateChange() {
   const inp = document.getElementById('date-input');
   let val = inp.value;
   const d = new Date(val + 'T12:00:00');
-  
+
   // Skip domingo
   if (d.getDay() === 0) {
     d.setDate(d.getDate() + 1);
@@ -797,14 +825,14 @@ function onDateChange() {
     inp.value = val;
     showAlert('Los domingos estamos cerrados. Te hemos seleccionado el lunes.');
   }
-  
+
   state.date = val;
   state.time = '';  // reset time
   updateDayName();
   renderSlots();
   updateSummaryBar();
 }
- 
+
 function changeGuests(delta) {
   const newVal = state.guests + delta;
   if (newVal < 1 || newVal > 8) {
@@ -815,19 +843,19 @@ function changeGuests(delta) {
   document.getElementById('guests-num').textContent = newVal;
   document.getElementById('minus-btn').disabled = newVal === 1;
   document.getElementById('plus-btn').disabled  = newVal === 8;
-  
+
   // Re-render slots with new guest count
   if (state.zone) renderSlots();
   updateSummaryBar();
 }
- 
+
 function selectTime(el) {
   document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   state.time = el.getAttribute('data-time');
   updateSummaryBar();
 }
- 
+
 function selectZone(zone, el) {
   document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
   if (el) el.classList.add('selected');
@@ -836,11 +864,11 @@ function selectZone(zone, el) {
   renderSlots();
   updateSummaryBar();
 }
- 
+
 function toggleOccasion(el) {
   el.classList.toggle('selected');
 }
- 
+
 function toggleAlergeno(el) {
   const val = el.getAttribute('data-val');
   if (val === 'Ninguna') {
@@ -851,7 +879,7 @@ function toggleAlergeno(el) {
     el.classList.toggle('selected');
   }
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // NAVIGATION
 // ─────────────────────────────────────────────────────────
@@ -870,12 +898,15 @@ function nextStep() {
     state.comments = document.getElementById('comments').value.trim();
     state.policy1 = document.getElementById('policy1').checked;
     const policy2 = document.getElementById('policy2').checked;
-    
+
+    // Consentimiento de comunicaciones — OPCIONAL, nunca bloquea la reserva
+    state.consentComms = document.getElementById('policy3').checked ? 'SI' : 'NO';
+
     if (!state.fname || !state.lname) return showAlert('Introduce tu nombre completo');
     if (!state.email || !/\S+@\S+\.\S+/.test(state.email)) return showAlert('Introduce un email válido');
     if (!state.phone) return showAlert('Introduce tu teléfono');
     if (!state.policy1 || !policy2) return showAlert('Acepta las políticas para continuar');
-    
+
     // Build summary
     const d = new Date(state.date + 'T12:00:00');
     document.getElementById('sum-date').textContent = `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
@@ -883,39 +914,41 @@ function nextStep() {
     document.getElementById('sum-guests').textContent = state.guests + (state.guests === 1 ? ' persona' : ' personas');
     const zoneNames = {interior:'Interior 🪴', terraza:'Terraza ☀️', barra:'Sin preferencia 🥗'};
     document.getElementById('sum-zone').textContent = zoneNames[state.zone] || state.zone;
-    
+
     const occ = Array.from(document.querySelectorAll('.occasion-chip.selected')).map(c => c.getAttribute('data-val')).join(', ');
     document.getElementById('sum-occasion').textContent = occ || 'Ninguna';
-    
+
     document.getElementById('sum-name').textContent = state.fname + ' ' + state.lname;
     document.getElementById('sum-email').textContent = state.email;
     document.getElementById('sum-phone').textContent = state.phonePrefix + ' ' + state.phone;
-    
+
     const alerg = Array.from(document.querySelectorAll('.alergeno-chip.selected')).map(c => c.getAttribute('data-val')).join(', ');
     document.getElementById('sum-alergenos').textContent = alerg || 'Ninguna';
-    
+
+    document.getElementById('sum-consent').textContent = state.consentComms === 'SI' ? 'Sí acepto' : 'No acepto';
+
     if (state.comments) {
       document.getElementById('sum-comments-row').style.display = '';
       document.getElementById('sum-comments').textContent = state.comments;
     } else {
       document.getElementById('sum-comments-row').style.display = 'none';
     }
-    
+
     state.step = 3;
   } else if (state.step === 3) {
     confirmReservation();
   }
-  
+
   renderStep();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
- 
+
 function goBack() {
   if (state.step > 1) state.step--;
   renderStep();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
- 
+
 function nextValidDate() {
   const d = new Date();
   // Loop forward until we land on a non-Sunday
@@ -924,7 +957,7 @@ function nextValidDate() {
   }
   return d.toISOString().split('T')[0];
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // CONFIRM RESERVATION
 // ─────────────────────────────────────────────────────────
@@ -933,16 +966,16 @@ async function confirmReservation() {
   state.submitting = true;
   document.getElementById('cta-btn').disabled = true;
   document.getElementById('loading-overlay').classList.add('active');
-  
+
   const ref = 'ETM-' + Date.now().toString(36).toUpperCase().slice(-6);
   const d = new Date(state.date + 'T12:00:00');
   const dateStr = `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   const occasion = Array.from(document.querySelectorAll('.occasion-chip.selected')).map(c => c.getAttribute('data-val')).join(', ') || '—';
   const alergenos = Array.from(document.querySelectorAll('.alergeno-chip.selected')).map(c => c.getAttribute('data-val')).join(', ') || 'Ninguna';
-  
+
   // ─── UTM TRACKING (v3.0) ───
   const utms = getStoredUTMs();
-  
+
   const payload = {
     ref,
     date: state.date,
@@ -962,9 +995,11 @@ async function confirmReservation() {
     timestamp: new Date().toISOString(),
     utm_source: utms.utm_source || 'direct',
     utm_campaign: utms.utm_campaign || '',
-    utm_content: utms.utm_content || ''
+    utm_content: utms.utm_content || '',
+    consent_comms: state.consentComms || 'NO',
+    consent_version: state.consentComms === 'SI' ? CONSENT_VERSION : ''
   };
-  
+
   try {
     // Save to Google Sheets
     const form = new URLSearchParams();
@@ -978,7 +1013,7 @@ async function confirmReservation() {
       showAlert('No se pudo guardar la reserva en el sistema. Por favor, contáctanos directamente por WhatsApp al +34 614 14 36 45.');
       return;
     }
- 
+
     // Send emails
     try {
       await emailjs.send(EMAILJS_SERVICE, EMAILJS_TEMPLATE_R, payload);
@@ -988,7 +1023,7 @@ async function confirmReservation() {
       // Reservation is saved — don't block success, just warn
       console.warn('Reservation saved but email delivery failed. Ref:', ref);
     }
- 
+
     // Success
     document.getElementById('ref-code').textContent = ref;
     state.step = 4;
@@ -1003,40 +1038,41 @@ async function confirmReservation() {
     document.getElementById('loading-overlay').classList.remove('active');
   }
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // NEW RESERVATION — full reset
 // ─────────────────────────────────────────────────────────
 function newReservation() {
-  state = { step:1, date:'', time:'', guests:2, zone:'', fname:'', lname:'', email:'', phone:'', phonePrefix:'+34', comments:'', policy1:false, submitting:false };
-  
+  state = { step:1, date:'', time:'', guests:2, zone:'', fname:'', lname:'', email:'', phone:'', phonePrefix:'+34', comments:'', policy1:false, consentComms:'NO', submitting:false };
+
   ['fname','lname','email','phone','comments'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
   document.getElementById('policy1').checked = false;
   document.getElementById('policy2').checked = false;
+  document.getElementById('policy3').checked = false;
   document.getElementById('phone-prefix').value = '+34';
-  
+
   document.querySelectorAll('.occasion-chip, .alergeno-chip').forEach(c => c.classList.remove('selected'));
   document.querySelectorAll('.zone-card').forEach(c => c.classList.remove('selected'));
-  
+
   document.getElementById('guests-num').textContent = '2';
   document.getElementById('minus-btn').disabled = true;
   document.getElementById('plus-btn').disabled  = false;
-  
+
   const val = nextValidDate();
   const inp = document.getElementById('date-input');
   inp.value = val;
   inp.min   = val;
   state.date = val;
-  
+
   updateDayName();
   renderSlots();
   renderStep();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // RENDER STEP — UI sync
 // ─────────────────────────────────────────────────────────
@@ -1052,7 +1088,7 @@ function renderStep() {
     else if (n === state.step) ind.className = 'step active';
     else                       ind.className = 'step inactive';
   });
-  
+
   const bar = document.getElementById('summary-bar');
   if (state.step === 4) { bar.style.display = 'none'; return; }
   bar.style.display = '';
@@ -1061,7 +1097,7 @@ function renderStep() {
   btn.textContent = state.step === 3 ? '✓ Confirmar reserva' : 'Continuar →';
   updateSummaryBar();
 }
- 
+
 function updateSummaryBar() {
   const barDate   = document.getElementById('bar-date');
   const barGuests = document.getElementById('bar-guests');
@@ -1078,23 +1114,23 @@ function updateSummaryBar() {
     barGuests.textContent = '';
   }
 }
- 
+
 function updateDayName() {
   const el = document.getElementById('day-name');
   if (!state.date) { el.textContent = ''; return; }
   const d = new Date(state.date + 'T12:00:00');
   el.textContent = DAYS[d.getDay()] + ', ' + d.getDate() + ' de ' + MONTHS[d.getMonth()];
 }
- 
+
 function showAlert(msg) {
   alert(msg);
 }
- 
+
 // ─────────────────────────────────────────────────────────
 // BOOT
 // ─────────────────────────────────────────────────────────
 renderStep();
- 
+
 // ─────────────────────────────────────────────────────────
 // MODIFICATION MODE
 // ─────────────────────────────────────────────────────────
@@ -1109,17 +1145,17 @@ renderStep();
     if (main) main.insertBefore(banner, main.firstChild);
   }
 })();
- 
+
 // ─────────────────────────────────────────────────────────
 // ADMIN — open/close reservations
 // ─────────────────────────────────────────────────────────
 async function adminToggle() {
   const overlay = document.getElementById('closed-overlay');
   const isClosed = overlay.classList.contains('active');
-  
+
   try {
     await fetch(SHEETS_URL + `?action=setConfig&cerrado=${isClosed ? '0' : '1'}`);
-    
+
     if (isClosed) {
       overlay.classList.remove('active');
       document.getElementById('admin-toggle-btn').textContent = '⏸ Pausar reservas';
@@ -1134,33 +1170,16 @@ async function adminToggle() {
     showAlert('Error al cambiar el estado de las reservas');
   }
 }
- 
+
 // Check on load
 (function() {
   if (window.location.search.includes('admin=1')) {
-    document.getElementById('admin-bar').style.display = 'block';
+    const adminBar = document.getElementById('admin-bar');
+    if (adminBar) adminBar.style.display = 'block';
   }
 })();
- 
+
 </script>
- 
-<!-- ADMIN: RESERVAS CERRADAS OVERLAY -->
-<div class="closed-overlay" id="closed-overlay">
-  <img class="closed-logo" src="" alt="Etama">
-  <div class="closed-icon">🌿</div>
-  <p class="closed-title">Reservas pausadas</p>
-  <p class="closed-sub">En este momento no estamos aceptando nuevas reservas online.<br>Puedes contactarnos por WhatsApp al <strong>+34 614 14 36 45</strong> para más información.</p>
-</div>
- 
-<!-- ADMIN BUTTON (solo visible en ?admin=1) -->
-<div id="admin-bar" style="display:none;position:fixed;bottom:24px;right:24px;z-index:99999;">
-  <button id="admin-toggle-btn" onclick="adminToggle()" style="
-    background:var(--green-deep);color:white;border:none;border-radius:50px;
-    padding:14px 24px;font-family:'Museo Sans',sans-serif;font-size:14px;
-    font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.3);
-    letter-spacing:0.5px;
-  ">⏸ Pausar reservas</button>
-</div>
- 
+
 </body>
 </html>
